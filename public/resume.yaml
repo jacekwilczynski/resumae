@@ -2,8 +2,8 @@ name: John Smith
 contactInfo:
   - 45 Street Name
   - NS32P London, UK
-  - john_smith5@mailbox.com
-  - '+44 1234 567 890'
+  - '[email:john_smith5@mailbox.com]'
+  - '[phone:+44 1234 567 890]'
 sections:
   - title: Work experience
     subsections:

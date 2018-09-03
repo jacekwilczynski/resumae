@@ -1,15 +1,14 @@
 import * as React from 'react';
-import getHref from './getHref';
+import ResumaeText from 'containers/ResumaeText';
 
 export interface ItemProps {
-  data: string
+  data: string;
 }
 
 const Item: React.SFC<ItemProps> = ({ data }) => {
-  const href = getHref(data);
   return (
     <li className="header__list-item">
-      {href ? <a href={href}>{data}</a> : data}
+      <ResumaeText>{data}</ResumaeText>
     </li>
   );
 };
