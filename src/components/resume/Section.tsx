@@ -32,26 +32,18 @@ export interface SectionProps {
   text?: string;
   list?: string[];
   subsections?: SubsectionProps[];
-  folded?: boolean;
 }
 
 const Section: React.SFC<SectionProps> = ({
   title,
   text,
   list,
-  subsections,
-  folded
+  subsections
 }) => (
   <section className="section">
     <div className="section__title">{title}</div>
-    <div className={`section__body${folded ? ' section__body--folded' : ''}`}>
-      {getBody(subsections, text, list)}
-    </div>
+    <div className={`section__body$`}>{getBody(subsections, text, list)}</div>
   </section>
 );
-
-Section.defaultProps = {
-  folded: false
-};
 
 export default Section;

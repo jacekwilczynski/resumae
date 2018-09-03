@@ -12,10 +12,6 @@
   text-transform: uppercase;
 }
 
-.section__body--folded {
-  transform: scaleY(0);
-}
-
 @media screen {
   .section a {
     font-weight: bold;
