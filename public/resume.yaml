@@ -12,8 +12,8 @@ sections:
         time: 'June 2016 - August 2018'
         location: London, UK
         list:
-          - Doing stuff
-          - And other stuff
+          - Doing stuff like [www:https://reactjs.org/]
+          - And other stuff, e.g. [www:https://github.com/] or [www:https://redux-saga.js.org]!
           - And much much more!
       - post: Professional Sleeper
         company: myhome.org
