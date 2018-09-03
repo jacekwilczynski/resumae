@@ -6,7 +6,7 @@ const parseToString = (input: string) =>
   renderToStaticMarkup(parseLinks(input) as React.ReactElement<any>);
 
 const link = ({ href, text }: { href: string; text: string }) =>
-  `<a href="${href}">${text}</a>`;
+  `<a href="${href}" target="_blank" rel="noopener noreferrer">${text}</a>`;
 
 describe('given plain text', function() {
   it('should return a string', function() {
