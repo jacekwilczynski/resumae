@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Resume, { ResumeProps } from 'components/Resume';
-import * as yaml from 'js-yaml';
+import Resume from 'components/Resume';
+import { safeLoad as parseYaml } from 'js-yaml';
 import MonacoEditor from 'react-monaco-editor';
 
 interface AppProps {
@@ -8,37 +8,40 @@ interface AppProps {
 }
 
 interface AppState {
-  resumeData: ResumeProps;
+  yamlData: string;
 }
 
 class App extends React.Component<AppProps, AppState> {
   state = {
-    resumeData: {
-      name: '',
-      contactInfo: [],
-      sections: []
-    }
+    yamlData: ''
   };
 
   componentDidMount() {
     fetch(this.props.resumeUrl)
       .then(res => res.text())
-      .then(yaml.safeLoad)
-      .then(resumeData => {
-        this.setState({ resumeData });
+      .then(yamlData => {
+        this.setState({ yamlData });
       });
   }
+
+  handleChange = (yamlData: string) => {
+    this.setState({ yamlData });
+  };
 
   render() {
     return (
       <div style={{ display: 'flex' }}>
-        <MonacoEditor
-          language="yaml"
-          theme="vs-dark"
-          height={window.innerHeight}
-          width={window.innerWidth / 2}
-        />
-        <Resume {...this.state.resumeData} />
+        <div className="screen-only">
+          <MonacoEditor
+            language="yaml"
+            theme="vs-dark"
+            height={window.innerHeight}
+            width={window.innerWidth / 2}
+            value={this.state.yamlData}
+            onChange={this.handleChange}
+          />
+        </div>
+        {this.state.yamlData && <Resume {...parseYaml(this.state.yamlData)} />}
       </div>
     );
   }
