@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ResumaeText from '../containers/ResumaeText';
+import ResumaeText from 'containers/ResumaeText';
 
 export interface ListProps {
   items: string[];
