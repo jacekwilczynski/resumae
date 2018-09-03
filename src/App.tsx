@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Resume, { ResumeProps } from './components/Resume';
+import Resume, { ResumeProps } from 'components/Resume';
 import * as yaml from 'js-yaml';
 
 interface AppProps {

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import List from '../List';
-import Text from '../Text';
-import TwoColumnLayout from '../TwoColumnLayout';
+import List from 'components/List';
+import Text from 'components/Text';
+import TwoColumnLayout from 'components/TwoColumnLayout';
 import Subsection, { SubsectionProps } from './Subsection';
 
 const getPlainBody = (

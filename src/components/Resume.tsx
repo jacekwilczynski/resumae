@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Container from './Container';
+import Container from 'components/Container';
 import Header from './resume/Header';
 import Section, { SectionProps } from './resume/Section';
 

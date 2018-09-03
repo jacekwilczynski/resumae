@@ -1,7 +1,7 @@
 import * as React from 'react';
-import List from '../List';
-import Text from '../Text';
-import TwoColumnLayout from '../TwoColumnLayout';
+import List from 'components/List';
+import Text from 'components/Text';
+import TwoColumnLayout from 'components/TwoColumnLayout';
 
 const Expand: React.SFC<any> = props => (
   <button className="subsection__expand" {...props}>
