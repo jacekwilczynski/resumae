@@ -22,10 +22,19 @@ class App extends React.Component<AppProps, AppState> {
       .then(yamlData => {
         this.setState({ yamlData });
       });
+    window.addEventListener('resize', this.handleWindowResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowResize);
   }
 
   handleChange = (yamlData: string) => {
     this.setState({ yamlData });
+  };
+
+  handleWindowResize = () => {
+    this.forceUpdate();
   };
 
   render() {
