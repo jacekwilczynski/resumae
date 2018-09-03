@@ -1,17 +1,7 @@
 import * as React from 'react';
-import List from 'components/List';
-import Text from 'components/Text';
 import TwoColumnLayout from 'components/TwoColumnLayout';
 import Subsection, { SubsectionProps } from './Subsection';
-
-const getPlainBody = (
-  text?: string,
-  list?: string[]
-): React.ReactNode | null => {
-  if (text) return <Text>{text}</Text>;
-  if (list) return <List items={list} />;
-  return null;
-};
+import getPlainBody from 'utils/getPlainBody';
 
 const serializeSubsection = ({
   post = '',
