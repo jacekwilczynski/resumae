@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Item from './header/Item';
+import ResumaeText from '../../containers/ResumaeText';
 
 export interface HeaderProps {
   caption: string;
@@ -11,7 +11,9 @@ const Header: React.SFC<HeaderProps> = ({ caption, list }) => (
     <div className="header__caption">{caption}</div>
     <div className="header__list">
       {list!.map(item => (
-        <Item key={item} data={item} />
+        <li key={item} className="header__list-item">
+          <ResumaeText>{item}</ResumaeText>
+        </li>
       ))}
     </div>
   </div>
