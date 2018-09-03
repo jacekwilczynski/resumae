@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ResumaeText from 'containers/ResumaeText';
 
-interface TextProps {
+export interface TextProps {
   children: string;
 }
 

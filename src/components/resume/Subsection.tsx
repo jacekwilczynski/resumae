@@ -13,9 +13,9 @@ export interface SubsectionProps {
   folded?: boolean;
 }
 
-type SubsectionState = {
+interface SubsectionState {
   folded: boolean;
-};
+}
 
 class Subsection extends React.Component<SubsectionProps, SubsectionState> {
   state: SubsectionState;

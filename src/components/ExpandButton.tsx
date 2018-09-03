@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const ExpandButton: React.SFC = props => (
+const ExpandButton: React.SFC<any> = props => (
   <button className="subsection__expand" {...props}>
     {props.children}
   </button>
