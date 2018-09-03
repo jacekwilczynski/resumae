@@ -7,9 +7,7 @@ import SubsectionRight, {
   SubsectionRightProps
 } from './subsection/SubsectionRight';
 
-export interface SubsectionProps
-  extends SubsectionLeftProps,
-    SubsectionRightProps {}
+export type SubsectionProps = SubsectionLeftProps & SubsectionRightProps;
 
 const Subsection: React.SFC<SubsectionProps> = props => (
   <div className="subsection">
