@@ -1,20 +1,14 @@
 import * as React from 'react';
 
-const prefixes = {
-  www: '',
-  email: 'mailto:',
-  phone: 'tel:'
-};
-
-const regExp = /(.*)\[(www|email|phone):(.*)](.*)/;
+const regExp = /(.*)\[(\w+:\/*)(.*)](.*)/;
 
 /**
  * @function parseLinks
  *
  * Converts a string into a React element, parsing custom link tags as anchors that will open in a new browser window/tab.
- * [www:https://github.com/] -> <a href="https://github.com/" ...>github.com</a>
- * [email:someone@provider.net] -> <a href="mailto:someone@provider.net" ...>someone@provider.net</a>
- * [phone:987654321] -> <a href="tel:987654321" ...>987654321</a>
+ * [https://github.com/] -> <a href="https://github.com/" ...>github.com</a>
+ * [mailto:someone@provider.net] -> <a href="mailto:someone@provider.net" ...>someone@provider.net</a>
+ * [tel:987654321] -> <a href="tel:987654321" ...>987654321</a>
  *
  * @param {string} str
  * @returns {React.ReactElement}
@@ -22,16 +16,12 @@ const regExp = /(.*)\[(www|email|phone):(.*)](.*)/;
 const parseLinks = (str: string): React.ReactElement<any> => {
   const anchorMatch = regExp.exec(str);
   if (anchorMatch) {
-    const [, before, type, url, after] = anchorMatch;
-    const shortUrl = url.replace(/^.*:\/\//, '').replace(/\/$/, '');
+    const [, before, prefix, url, after] = anchorMatch;
+    const shortUrl = url.replace(/\/$/, '');
     return (
       <React.Fragment>
         {parseLinks(before)}
-        <a
-          href={prefixes[type] + url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href={prefix + url} target="_blank" rel="noopener noreferrer">
           {shortUrl}
         </a>
         {after}

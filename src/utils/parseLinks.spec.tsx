@@ -17,7 +17,7 @@ describe('given plain text', function() {
 
 describe('given a www tag', function() {
   describe('without any surrounding text', function() {
-    const input = '[www:https://github.com/]';
+    const input = '[https://github.com/]';
     const expected = link({
       href: 'https://github.com/',
       text: 'github.com'
@@ -30,7 +30,7 @@ describe('given a www tag', function() {
   });
 
   describe('with surrounding text', function() {
-    const input = 'text before [www:http://example.org] text after';
+    const input = 'text before [http://example.org] text after';
     const expected = `text before ${link({
       href: 'http://example.org',
       text: 'example.org'
@@ -44,9 +44,9 @@ describe('given a www tag', function() {
 });
 
 describe('given two www tags surrounded by text', function() {
-  const input = 'page 1 [www:abc.com]page2[www:https://abc.net/] end';
+  const input = 'page 1 [http://abc.com]page2[https://abc.net/] end';
   const expected = `page 1 ${link({
-    href: 'abc.com',
+    href: 'http://abc.com',
     text: 'abc.com'
   })}page2${link({ href: 'https://abc.net/', text: 'abc.net' })} end`;
   const actual = parseToString(input);
@@ -57,7 +57,7 @@ describe('given two www tags surrounded by text', function() {
 });
 
 describe('given an email tag', function() {
-  const input = 'my e-mail address is [email:john_doe@mail.com]!';
+  const input = 'my e-mail address is [mailto:john_doe@mail.com]!';
   const expected = `my e-mail address is ${link({
     href: 'mailto:john_doe@mail.com',
     text: 'john_doe@mail.com'
@@ -70,7 +70,7 @@ describe('given an email tag', function() {
 });
 
 describe('given a phone tag', function() {
-  const input = 'You can get hold of me at [phone:123456789]';
+  const input = 'You can get hold of me at [tel:123456789]';
   const expected = `You can get hold of me at ${link({
     href: 'tel:123456789',
     text: '123456789'
