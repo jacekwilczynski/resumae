@@ -1,0 +1,55 @@
+.subsection {
+  padding: 1.5em 0.5em;
+}
+
+.subsection:not(:first-of-type) {
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.subsection__header {
+  margin-bottom: 1em;
+}
+
+.subsection__expand {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.5em 1em;
+  text-transform: lowercase;
+  letter-spacing: 0.1em;
+  transition: background-color 0.3s;
+}
+
+.subsection__expand:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.subsection__post {
+  font-family: var(--font-heading);
+  font-size: 1.25em;
+  font-weight: bold;
+  letter-spacing: var(--heading-letter-spacing);
+  text-transform: uppercase;
+}
+
+.subsection__company {
+  font-family: var(--font-heading);
+  font-size: 1em;
+  font-weight: bold;
+  letter-spacing: var(--heading-letter-spacing);
+}
+
+@media screen {
+  .subsection__body--folded {
+    height: 0;
+    overflow: hidden;
+  }
+}
+
+@media print {
+  .subsection__expand {
+    display: none;
+  }
+}

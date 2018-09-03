@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Oxygen|Merriweather+Sans');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --font-main: Oxygen, sans-serif;
+  --font-heading: 'Merriweather Sans', sans-serif;
+  --heading-letter-spacing: 0.2em;
+}
+
+html {
+  font-family: var(--font-main);
+  font-size: 12px;
+}
+
+@media screen {
+  html {
+    font-size: 14px;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+a:hover {
+  opacity: 0.5;
+}

@@ -1,0 +1,19 @@
+.header {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 2em;
+}
+
+.header__caption {
+  font-size: 2em;
+  letter-spacing: 0.1em;
+}
+
+.header__list {
+  font-size: 1.08em;
+  line-height: 1.5;
+  list-style: none;
+  text-align: right;
+}

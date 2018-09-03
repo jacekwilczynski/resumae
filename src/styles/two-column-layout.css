@@ -1,0 +1,27 @@
+.two-column-layout {
+  display: flex;
+}
+
+.two-column-layout__left {
+  width: 20%;
+}
+
+.two-column-layout__right {
+  margin: 0 2em;
+  width: 80%;
+}
+
+@media (max-width: 500px) {
+  .two-column-layout {
+    flex-wrap: wrap;
+  }
+
+  .two-column-layout__left {
+    width: 100%;
+  }
+
+  .two-column-layout__right {
+    margin: 0;
+    width: 100%;
+  }
+}
