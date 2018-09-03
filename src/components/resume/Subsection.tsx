@@ -5,7 +5,7 @@ import TwoColumnLayout from '../TwoColumnLayout';
 
 const Expand: React.SFC<any> = props => (
   <button className="subsection__expand" {...props}>
-    Rozwiń
+    Expand
   </button>
 );
 
