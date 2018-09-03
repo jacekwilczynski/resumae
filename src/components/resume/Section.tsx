@@ -1,8 +1,8 @@
 import * as React from 'react';
 import TwoColumnLayout from 'components/TwoColumnLayout';
-import { SubsectionProps } from './Subsection';
+import Subsection, { SubsectionProps } from './Subsection';
 import getPlainBody from 'utils/getPlainBody';
-import SubsectionContainer from '../../containers/SubsectionContainer';
+import Toggle from '../../containers/Toggle';
 
 const serializeSubsection = ({
   post = '',
@@ -18,10 +18,11 @@ const getBody = (
 ) => {
   if (subsections)
     return subsections.map(subsection => (
-      <SubsectionContainer
-        key={serializeSubsection(subsection)}
-        {...subsection}
-      />
+      <Toggle key={serializeSubsection(subsection)} state={subsection.folded}>
+        {({ state: folded, toggle }) => (
+          <Subsection {...subsection} folded={folded} onExpandClick={toggle} />
+        )}
+      </Toggle>
     ));
   return <TwoColumnLayout rightContent={getPlainBody(text, list)} />;
 };
