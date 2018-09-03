@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Resume, { ResumeProps } from 'components/Resume';
 import * as yaml from 'js-yaml';
+import MonacoEditor from 'react-monaco-editor';
 
 interface AppProps {
   resumeUrl: string;
@@ -29,7 +30,17 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   render() {
-    return <Resume {...this.state.resumeData} />;
+    return (
+      <div style={{ display: 'flex' }}>
+        <MonacoEditor
+          language="yaml"
+          theme="vs-dark"
+          height={window.innerHeight}
+          width={window.innerWidth / 2}
+        />
+        <Resume {...this.state.resumeData} />
+      </div>
+    );
   }
 }
 
