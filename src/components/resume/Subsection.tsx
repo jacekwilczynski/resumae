@@ -2,12 +2,7 @@ import * as React from 'react';
 import List from 'components/List';
 import Text from 'components/Text';
 import TwoColumnLayout from 'components/TwoColumnLayout';
-
-const Expand: React.SFC<any> = props => (
-  <button className="subsection__expand" {...props}>
-    Expand
-  </button>
-);
+import LanguageSensitiveExpandButton from 'containers/LanguageSensitiveExpandButton';
 
 const getPlainBody = (
   text?: string,
@@ -70,7 +65,9 @@ class Subsection extends React.Component<SubsectionProps, SubsectionState> {
                 <h3 className="subsection__post">{post}</h3>
                 <h4 className="subsection__company">{company}</h4>
               </div>
-              {folded ? <Expand onClick={this.toggle} /> : null}
+              {folded ? (
+                <LanguageSensitiveExpandButton onClick={this.toggle} />
+              ) : null}
               <div
                 className={`subsection__body${
                   folded ? ' subsection__body--folded' : ''
