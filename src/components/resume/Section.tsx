@@ -11,19 +11,21 @@ const serializeSubsection = ({
   location = ''
 }: Partial<SubsectionProps>) => post + company + time + location;
 
-const getBody = (
+const getSubsections = (subsections: SubsectionProps[]) =>
+  subsections.map(subsection => (
+    <Toggle key={serializeSubsection(subsection)} state={subsection.folded}>
+      {({ state, toggle }) => (
+        <Subsection {...subsection} folded={state} onExpandClick={toggle} />
+      )}
+    </Toggle>
+  ));
+
+const getSectionBody = (
   subsections?: SubsectionProps[],
   text?: string,
   list?: string[]
 ) => {
-  if (subsections)
-    return subsections.map(subsection => (
-      <Toggle key={serializeSubsection(subsection)} state={subsection.folded}>
-        {({ state: folded, toggle }) => (
-          <Subsection {...subsection} folded={folded} onExpandClick={toggle} />
-        )}
-      </Toggle>
-    ));
+  if (subsections) return getSubsections(subsections);
   return <TwoColumnLayout rightContent={getPlainBody(text, list)} />;
 };
 
@@ -42,7 +44,9 @@ const Section: React.SFC<SectionProps> = ({
 }) => (
   <section className="section">
     <div className="section__title">{title}</div>
-    <div className={`section__body$`}>{getBody(subsections, text, list)}</div>
+    <div className={`section__body$`}>
+      {getSectionBody(subsections, text, list)}
+    </div>
   </section>
 );
 
