@@ -2,7 +2,7 @@ import * as React from 'react';
 import TwoColumnLayout from 'components/TwoColumnLayout';
 import Subsection, { SubsectionProps } from './Subsection';
 import getPlainBody from 'utils/getPlainBody';
-import Toggle from '../../containers/Toggle';
+import Toggle from 'containers/Toggle';
 
 const serializeSubsection = ({
   post = '',

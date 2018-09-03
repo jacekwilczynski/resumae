@@ -1,6 +1,6 @@
 import * as React from 'react';
-import LanguageSensitiveExpandButton from '../../../containers/LanguageSensitiveExpandButton';
-import getPlainBody from '../../../utils/getPlainBody';
+import LanguageSensitiveExpandButton from 'containers/LanguageSensitiveExpandButton';
+import getPlainBody from 'utils/getPlainBody';
 
 export interface SubsectionRightProps {
   post?: string;
