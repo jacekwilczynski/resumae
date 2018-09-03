@@ -1,7 +1,8 @@
 import * as React from 'react';
 import TwoColumnLayout from 'components/TwoColumnLayout';
-import Subsection, { SubsectionProps } from './Subsection';
+import { SubsectionProps } from './Subsection';
 import getPlainBody from 'utils/getPlainBody';
+import SubsectionContainer from '../../containers/SubsectionContainer';
 
 const serializeSubsection = ({
   post = '',
@@ -17,7 +18,10 @@ const getBody = (
 ) => {
   if (subsections)
     return subsections.map(subsection => (
-      <Subsection key={serializeSubsection(subsection)} {...subsection} />
+      <SubsectionContainer
+        key={serializeSubsection(subsection)}
+        {...subsection}
+      />
     ));
   return <TwoColumnLayout rightContent={getPlainBody(text, list)} />;
 };
