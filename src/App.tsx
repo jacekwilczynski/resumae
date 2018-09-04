@@ -4,9 +4,10 @@ import Editor from 'components/Editor';
 import getResumeData from 'utils/getResumeData';
 import calcEditorWidth from 'utils/calcEditorWidth';
 import ScrollPositionRetainer from './utils/ScrollPositionRetainer';
+import getInitialYamlData from './utils/getInitialYamlData';
 
 interface AppProps {
-  resumeUrl: string;
+  sampleResumeUrl: string;
 }
 
 interface AppState {
@@ -37,7 +38,11 @@ class App extends React.Component<AppProps, AppState> {
   };
 
   componentDidMount() {
-    this.hydrate();
+    getInitialYamlData({ sampleResumeUrl: this.props.sampleResumeUrl }).then(
+      yamlData => {
+        this.setState({ yamlData });
+      }
+    );
     window.addEventListener('resize', this.handleWindowResize);
     window.addEventListener('keyup', this.handleKeyUp);
   }
@@ -79,19 +84,6 @@ class App extends React.Component<AppProps, AppState> {
       showEditor: !this.state.showEditor
     }));
   };
-
-  private hydrate() {
-    const fromLocalStorage = window.localStorage.getItem('resumae');
-    if (!fromLocalStorage) {
-      fetch(this.props.resumeUrl)
-        .then(res => res.text())
-        .then(yamlData => {
-          this.setState({ yamlData });
-        });
-    } else {
-      this.setState({ yamlData: fromLocalStorage });
-    }
-  }
 }
 
 export default App;

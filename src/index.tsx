@@ -5,7 +5,7 @@ import App from './App';
 import 'styles/index.css';
 
 ReactDOM.render(
-  <App resumeUrl={`${process.env.PUBLIC_URL}/resume.yaml`} />,
+  <App sampleResumeUrl={`${process.env.PUBLIC_URL}/resume.yaml`} />,
   document.getElementById('root')
 );
 registerServiceWorker();
