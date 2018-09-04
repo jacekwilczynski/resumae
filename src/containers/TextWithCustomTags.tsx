@@ -5,10 +5,10 @@ export interface ResumaeTextProps {
   children: string;
 }
 
-class ResumaeText extends React.PureComponent<ResumaeTextProps> {
+class TextWithCustomTags extends React.PureComponent<ResumaeTextProps> {
   render() {
     return parseLinks(this.props.children);
   }
 }
 
-export default ResumaeText;
+export default TextWithCustomTags;

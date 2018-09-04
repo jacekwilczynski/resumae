@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ResumaeText from 'containers/ResumaeText';
+import TextWithCustomTags from 'containers/TextWithCustomTags';
 
 export interface TextProps {
   children: string;
@@ -7,7 +7,7 @@ export interface TextProps {
 
 const Text: React.SFC<TextProps> = ({ children }) => (
   <p className="text">
-    <ResumaeText>{children}</ResumaeText>
+    <TextWithCustomTags>{children}</TextWithCustomTags>
   </p>
 );
 

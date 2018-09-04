@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ResumaeText from 'containers/ResumaeText';
+import TextWithCustomTags from 'containers/TextWithCustomTags';
 
 export interface HeaderProps {
   caption: string;
@@ -13,7 +13,7 @@ const Header: React.SFC<HeaderProps> = ({ caption, list }) => (
       {Array.isArray(list) &&
         list.map(item => (
           <li key={item} className="header__list-item">
-            <ResumaeText>{item}</ResumaeText>
+            <TextWithCustomTags>{item}</TextWithCustomTags>
           </li>
         ))}
     </div>
