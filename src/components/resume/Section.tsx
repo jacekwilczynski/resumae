@@ -12,6 +12,7 @@ const serializeSubsection = ({
 }: Partial<SubsectionProps>) => post + company + time + location;
 
 const getSubsections = (subsections: SubsectionProps[]) =>
+  Array.isArray(subsections) &&
   subsections.map(subsection => (
     <Toggle key={serializeSubsection(subsection)} state={subsection.folded}>
       {({ state, toggle }) => (

@@ -7,7 +7,7 @@ export interface ListProps {
 
 const List: React.SFC<ListProps> = ({ items }) => (
   <ul className="list">
-    {items.map(item => (
+    {Array.isArray(items) && items.map(item => (
       <li key={item} className="list__item">
         <ResumaeText>{item}</ResumaeText>
       </li>

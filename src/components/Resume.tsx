@@ -12,9 +12,8 @@ export interface ResumeProps {
 const Resume: React.SFC<ResumeProps> = ({ name, contactInfo, sections }) => (
   <Container>
     <Header caption={name} list={contactInfo} />
-    {sections.map(section => (
-      <Section key={section.title} {...section} />
-    ))}
+    {Array.isArray(sections) &&
+      sections.map(section => <Section key={section.title} {...section} />)}
   </Container>
 );
 
