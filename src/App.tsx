@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Resume from 'components/Resume';
-import { safeLoad as parseYaml } from 'js-yaml';
 import Editor from 'components/Editor';
+import getResumeData from 'utils/getResumeData';
 
 interface AppProps {
   resumeUrl: string;
@@ -59,7 +59,11 @@ class App extends React.Component<AppProps, AppState> {
           height={window.innerHeight}
           width={getEditorWidth()}
         />
-        <Resume {...this.getResumeData()} innerRef={this.resumePreviewRef} />)
+        <Resume
+          {...getResumeData(this.state.yamlData)}
+          innerRef={this.resumePreviewRef}
+        />
+        )
       </div>
     );
   }
@@ -105,20 +109,6 @@ class App extends React.Component<AppProps, AppState> {
     } else {
       this.setState({ yamlData: fromLocalStorage });
     }
-  }
-
-  private getResumeData() {
-    let resumeData: any;
-    try {
-      resumeData = parseYaml(this.state.yamlData);
-    } catch (e) {
-      resumeData = {
-        name: e.message,
-        contactInfo: [],
-        sections: []
-      };
-    }
-    return resumeData;
   }
 }
 
