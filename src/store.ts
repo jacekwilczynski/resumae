@@ -1,9 +1,8 @@
-import { AnyAction, applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { logger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import saga from 'saga';
-
-const reducer = (state = {}, action: AnyAction) => state || action;
+import reducer from 'reducer';
 
 export default () => {
   const sagaMiddleware = createSagaMiddleware();

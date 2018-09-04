@@ -2,15 +2,19 @@ import getSectionBody from './normalizeYamlData/getSectionBody';
 import getSubsectionBody from './normalizeYamlData/getSubsectionBody';
 
 const getResume = ({ resumeId, personId, sections }: any) => ({
-  id: resumeId,
-  person: personId,
-  sections: Array.isArray(sections) ? sections.map(section => section.id) : []
+  [resumeId]: {
+    id: resumeId,
+    person: personId,
+    sections: Array.isArray(sections) ? sections.map(section => section.id) : []
+  }
 });
 
 const getPerson = ({ name, contactInfo, personId }: any) => ({
-  name,
-  contactInfo,
-  id: personId
+  [personId]: {
+    name,
+    contactInfo,
+    id: personId
+  }
 });
 
 const getSections = ({ sections }: any) => {
@@ -51,13 +55,13 @@ const makeObject = (arr: any[]) => {
 const normalizeYamlData = (yamlData: any) => {
   const resume = getResume(yamlData);
   const person = getPerson(yamlData);
-  const sections = makeObject(getSections(yamlData));
-  const subsections = makeObject(getSubsections(yamlData));
+  const section = makeObject(getSections(yamlData));
+  const subsection = makeObject(getSubsections(yamlData));
   return {
     resume,
     person,
-    sections,
-    subsections
+    section,
+    subsection
   };
 };
 

@@ -1,5 +1,6 @@
 import loadYamlSaga from 'sagas/loadYamlSaga';
+import { all } from 'redux-saga/effects';
 
 export default function* saga() {
-  yield loadYamlSaga();
+  yield all([loadYamlSaga()]);
 }

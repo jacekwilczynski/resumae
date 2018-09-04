@@ -41,3 +41,40 @@ export const loadYamlError = (e: Error) => ({
   error: true,
   payload: e
 });
+
+export const ADD_ENTITIES = 'ADD_ENTITIES';
+
+export interface AddEntitiesAction {
+  type: 'ADD_ENTITIES';
+  payload: AddEntitiesActionPayload;
+}
+export interface AddEntitiesActionPayload {
+  entity: string;
+  data: any;
+}
+export const addEntities = ({
+  entity,
+  data
+}: AddEntitiesActionPayload): AddEntitiesAction => ({
+  type: ADD_ENTITIES,
+  payload: {
+    entity,
+    data
+  }
+});
+
+export const SET_ACTIVE_RESUME = 'SET_ACTIVE_RESUME';
+
+export interface SetActiveResumeAction {
+  type: 'SET_ACTIVE_RESUME';
+  payload: SetActiveResumeActionPayload;
+}
+export interface SetActiveResumeActionPayload {
+  id: string;
+}
+export const setActiveResume = ({
+  id
+}: SetActiveResumeActionPayload): SetActiveResumeAction => ({
+  type: SET_ACTIVE_RESUME,
+  payload: { id }
+});
