@@ -1,4 +1,4 @@
-enum SubsectionBodyTypes {
+export enum SubsectionBodyTypes {
   TEXT = 'text',
   LIST = 'list'
 }

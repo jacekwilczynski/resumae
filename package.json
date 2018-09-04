@@ -9,7 +9,8 @@
     "react-redux": "^5.0.7",
     "react-scripts-ts": "2.17.0",
     "redux": "^4.0.0",
-    "redux-saga": "^0.16.0"
+    "redux-saga": "^0.16.0",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -20,14 +21,16 @@
     "deploy": "gh-pages -d build"
   },
   "devDependencies": {
-    "@types/js-yaml": "^3.11.2",
-    "@types/react-redux": "^6.0.6",
-    "@types/redux-logger": "^3.0.6",
     "@types/jest": "^23.3.1",
+    "@types/js-yaml": "^3.11.2",
     "@types/node": "^10.9.4",
+    "@types/normalizr": "^2.0.18",
     "@types/react": "^16.4.13",
     "@types/react-dom": "^16.0.7",
+    "@types/react-redux": "5",
+    "@types/redux-logger": "^3.0.6",
     "@types/redux-saga": "^0.10.5",
+    "@types/uuid": "^3.4.4",
     "gh-pages": "^1.2.0",
     "redux-logger": "^3.0.6",
     "typescript": "^3.0.3"
