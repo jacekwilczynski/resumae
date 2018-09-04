@@ -62,25 +62,33 @@ class App extends React.Component<AppProps, AppState> {
 
   private toggleEditor = () => {
     if (this.state.showEditor) {
-      const scrollPosition =
-        this.resumePreviewRef.current &&
-        (this.resumePreviewRef.current as any).scrollTop;
-      setImmediate(() => {
-        window.scrollTo({ top: scrollPosition });
-      });
+      this.copyScrollPositionToWindow();
     } else {
-      const scrollPosition = window.scrollY;
-      setImmediate(() => {
-        if (this.resumePreviewRef.current) {
-          (this.resumePreviewRef.current as any).scrollTop = scrollPosition;
-        }
-      });
+      this.copyScrollPositionFromWindow();
     }
     this.setState(state => ({
       ...state,
       showEditor: !this.state.showEditor
     }));
   };
+
+  private copyScrollPositionFromWindow() {
+    const scrollPosition = window.scrollY;
+    setImmediate(() => {
+      if (this.resumePreviewRef.current) {
+        (this.resumePreviewRef.current as any).scrollTop = scrollPosition;
+      }
+    });
+  }
+
+  private copyScrollPositionToWindow() {
+    const scrollPosition =
+      this.resumePreviewRef.current &&
+      (this.resumePreviewRef.current as any).scrollTop;
+    setImmediate(() => {
+      window.scrollTo({ top: scrollPosition });
+    });
+  }
 
   private hydrate() {
     const fromLocalStorage = window.localStorage.getItem('resumae');
