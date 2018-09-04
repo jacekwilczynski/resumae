@@ -21,6 +21,8 @@ class App extends React.Component<AppProps, AppState> {
     showEditor: true
   };
 
+  resumePreviewRef = React.createRef();
+
   handleChange = (yamlData: string) => {
     window.localStorage.setItem('resumae', yamlData);
     this.setState({ yamlData });
@@ -51,12 +53,22 @@ class App extends React.Component<AppProps, AppState> {
         className={'resumae' + (this.state.showEditor ? ' resumae--split' : '')}
       >
         {this.renderEditor()}
-        {this.state.yamlData && <Resume {...this.getResumeData()} />}
+        {this.state.yamlData && (
+          <Resume {...this.getResumeData()} innerRef={this.resumePreviewRef} />
+        )}
       </div>
     );
   }
 
   private toggleEditor = () => {
+    if (this.state.showEditor) {
+      const scrollPosition =
+        this.resumePreviewRef.current &&
+        (this.resumePreviewRef.current as any).scrollTop;
+      setImmediate(function() {
+        window.scrollTo({ top: scrollPosition });
+      });
+    }
     this.setState(state => ({
       ...state,
       showEditor: !this.state.showEditor
