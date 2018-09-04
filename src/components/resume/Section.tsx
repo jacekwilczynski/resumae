@@ -11,15 +11,22 @@ const serializeSubsection = ({
   location = ''
 }: Partial<SubsectionProps>) => post + company + time + location;
 
+const subsectionStub = {
+  onExpandClick: () => {}
+};
+
 const getSubsections = (subsections: SubsectionProps[]) =>
   Array.isArray(subsections) &&
-  subsections.map(subsection => (
-    <Toggle key={serializeSubsection(subsection)} state={subsection.folded}>
-      {({ state, toggle }) => (
-        <Subsection {...subsection} folded={state} onExpandClick={toggle} />
-      )}
-    </Toggle>
-  ));
+  subsections.map(_subsection => {
+    const subsection = _subsection || subsectionStub;
+    return (
+      <Toggle key={serializeSubsection(subsection)} state={subsection.folded}>
+        {({ state, toggle }) => (
+          <Subsection {...subsection} folded={state} onExpandClick={toggle} />
+        )}
+      </Toggle>
+    );
+  });
 
 const getSectionBody = (
   subsections?: SubsectionProps[],
