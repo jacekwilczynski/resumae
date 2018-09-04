@@ -1,9 +1,9 @@
 import * as React from 'react';
-import LinkParser from './LinkParser';
+import TextWithCustomTags from './TextWithCustomTags';
 import { renderToStaticMarkup } from 'react-dom/server';
 
 const parseToString = (input: string) =>
-  renderToStaticMarkup(<LinkParser str={input} />);
+  renderToStaticMarkup(<TextWithCustomTags children={input} />);
 
 const link = ({ href, text }: { href: string; text: string }) =>
   `<a href="${href}" target="_blank" rel="noopener noreferrer">${text}</a>`;
