@@ -3,8 +3,9 @@ import Resume from 'components/Resume';
 import Editor from 'components/Editor';
 import getResumeData from 'utils/getResumeData';
 import calcEditorWidth from 'utils/calcEditorWidth';
-import ScrollPositionRetainer from './utils/ScrollPositionRetainer';
-import getInitialYamlData from './utils/getInitialYamlData';
+import ScrollPositionRetainer from 'utils/ScrollPositionRetainer';
+import getInitialYamlData from 'utils/getInitialYamlData';
+import App from 'components/App';
 
 interface AppProps {
   sampleResumeUrl: string;
@@ -15,7 +16,7 @@ interface AppState {
   showEditor: boolean;
 }
 
-class App extends React.Component<AppProps, AppState> {
+class AppContainer extends React.Component<AppProps, AppState> {
   state = {
     yamlData: '',
     showEditor: true
@@ -54,9 +55,7 @@ class App extends React.Component<AppProps, AppState> {
 
   render() {
     return (
-      <div
-        className={'resumae' + (this.state.showEditor ? ' resumae--split' : '')}
-      >
+      <App split={this.state.showEditor}>
         <Editor
           showEditor={this.state.showEditor}
           value={this.state.yamlData}
@@ -68,22 +67,25 @@ class App extends React.Component<AppProps, AppState> {
           {...getResumeData(this.state.yamlData)}
           innerRef={this.resumePreviewRef}
         />
-        )
-      </div>
+      </App>
     );
   }
 
   private toggleEditor = () => {
-    if (this.state.showEditor) {
-      this.scrollPositionRetainer.copyScrollPositionToWindow();
-    } else {
-      this.scrollPositionRetainer.copyScrollPositionFromWindow();
-    }
+    this.retainPreviewScrollPosition(this.state.showEditor);
     this.setState(state => ({
       ...state,
       showEditor: !this.state.showEditor
     }));
   };
+
+  private retainPreviewScrollPosition(goingToFullScreen: boolean) {
+    if (goingToFullScreen) {
+      this.scrollPositionRetainer.copyScrollPositionToWindow();
+    } else {
+      this.scrollPositionRetainer.copyScrollPositionFromWindow();
+    }
+  }
 }
 
-export default App;
+export default AppContainer;
