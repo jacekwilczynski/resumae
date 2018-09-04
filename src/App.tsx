@@ -2,6 +2,7 @@ import * as React from 'react';
 import Resume from 'components/Resume';
 import Editor from 'components/Editor';
 import getResumeData from 'utils/getResumeData';
+import calcEditorWidth from 'utils/calcEditorWidth';
 
 interface AppProps {
   resumeUrl: string;
@@ -11,9 +12,6 @@ interface AppState {
   yamlData: string;
   showEditor: boolean;
 }
-
-const getEditorWidth = () =>
-  window.innerWidth > 800 ? window.innerWidth / 2 : window.innerWidth;
 
 class App extends React.Component<AppProps, AppState> {
   state = {
@@ -57,7 +55,7 @@ class App extends React.Component<AppProps, AppState> {
           value={this.state.yamlData}
           onChange={this.handleChange}
           height={window.innerHeight}
-          width={getEditorWidth()}
+          width={calcEditorWidth()}
         />
         <Resume
           {...getResumeData(this.state.yamlData)}
