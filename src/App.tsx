@@ -50,7 +50,7 @@ class App extends React.Component<AppProps, AppState> {
       <div
         className={'resumae' + (this.state.showEditor ? ' resumae--split' : '')}
       >
-        {this.state.showEditor && this.renderEditor()}
+        {this.renderEditor()}
         {this.state.yamlData && <Resume {...this.getResumeData()} />}
       </div>
     );
@@ -78,7 +78,12 @@ class App extends React.Component<AppProps, AppState> {
 
   private renderEditor() {
     return (
-      <div className="resumae__editor">
+      <div
+        className={
+          'resumae__editor' +
+          (this.state.showEditor ? '' : ' resumae__editor--hidden')
+        }
+      >
         <MonacoEditor
           language="yaml"
           theme="vs-dark"
