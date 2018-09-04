@@ -64,6 +64,11 @@ class App extends React.Component<AppProps, AppState> {
             width={window.innerWidth / 2}
             value={this.state.yamlData}
             onChange={this.handleChange}
+            options={{
+              wordWrap: 'bounded',
+              wrappingIndent: 'indent',
+              scrollBeyondLastLine: false
+            }}
           />
         </div>
         {this.state.yamlData && <Resume {...resumeData} />}
