@@ -1,5 +1,5 @@
 import * as React from 'react';
-import parseLinks from 'utils/parseLinks';
+import LinkParser from 'utils/LinkParser';
 
 export interface ResumaeTextProps {
   children: string;
@@ -7,7 +7,7 @@ export interface ResumaeTextProps {
 
 class TextWithCustomTags extends React.PureComponent<ResumaeTextProps> {
   render() {
-    return parseLinks(this.props.children);
+    return LinkParser({ str: this.props.children });
   }
 }
 

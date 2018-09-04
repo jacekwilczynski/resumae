@@ -1,9 +1,9 @@
 import * as React from 'react';
-import parseLinks from './parseLinks';
+import LinkParser from './LinkParser';
 import { renderToStaticMarkup } from 'react-dom/server';
 
 const parseToString = (input: string) =>
-  renderToStaticMarkup(parseLinks(input) as React.ReactElement<any>);
+  renderToStaticMarkup(<LinkParser str={input} />);
 
 const link = ({ href, text }: { href: string; text: string }) =>
   `<a href="${href}" target="_blank" rel="noopener noreferrer">${text}</a>`;
@@ -30,7 +30,7 @@ describe('given a www tag', function() {
   });
 
   describe('with surrounding maybeText', function() {
-    const input = 'maybeText before [http://example.org] maybeText after';
+    const input = 'text before [http://example.org] text after';
     const expected = `text before ${link({
       href: 'http://example.org',
       text: 'example.org'
