@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Resume from 'components/Resume';
 import { safeLoad as parseYaml } from 'js-yaml';
-import MonacoEditor from 'react-monaco-editor';
+import Editor from 'components/Editor';
 
 interface AppProps {
   resumeUrl: string;
@@ -52,7 +52,13 @@ class App extends React.Component<AppProps, AppState> {
       <div
         className={'resumae' + (this.state.showEditor ? ' resumae--split' : '')}
       >
-        {this.renderEditor()}
+        <Editor
+          showEditor={this.state.showEditor}
+          value={this.state.yamlData}
+          onChange={this.handleChange}
+          height={window.innerHeight}
+          width={getEditorWidth()}
+        />
         {this.state.yamlData && (
           <Resume {...this.getResumeData()} innerRef={this.resumePreviewRef} />
         )}
@@ -101,31 +107,6 @@ class App extends React.Component<AppProps, AppState> {
     } else {
       this.setState({ yamlData: fromLocalStorage });
     }
-  }
-
-  private renderEditor() {
-    return (
-      <div
-        className={
-          'resumae__editor' +
-          (this.state.showEditor ? '' : ' resumae__editor--hidden')
-        }
-      >
-        <MonacoEditor
-          language="yaml"
-          theme="vs-dark"
-          height={window.innerHeight}
-          width={getEditorWidth()}
-          value={this.state.yamlData}
-          onChange={this.handleChange}
-          options={{
-            wordWrap: 'bounded',
-            wrappingIndent: 'indent',
-            scrollBeyondLastLine: false
-          }}
-        />
-      </div>
-    );
   }
 
   private getResumeData() {
