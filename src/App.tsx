@@ -3,6 +3,7 @@ import Resume from 'components/Resume';
 import Editor from 'components/Editor';
 import getResumeData from 'utils/getResumeData';
 import calcEditorWidth from 'utils/calcEditorWidth';
+import ScrollPositionRetainer from './utils/ScrollPositionRetainer';
 
 interface AppProps {
   resumeUrl: string;
@@ -20,6 +21,7 @@ class App extends React.Component<AppProps, AppState> {
   };
 
   resumePreviewRef = React.createRef();
+  scrollPositionRetainer = new ScrollPositionRetainer(this.resumePreviewRef);
 
   handleChange = (yamlData: string) => {
     window.localStorage.setItem('resumae', yamlData);
@@ -68,33 +70,15 @@ class App extends React.Component<AppProps, AppState> {
 
   private toggleEditor = () => {
     if (this.state.showEditor) {
-      this.copyScrollPositionToWindow();
+      this.scrollPositionRetainer.copyScrollPositionToWindow();
     } else {
-      this.copyScrollPositionFromWindow();
+      this.scrollPositionRetainer.copyScrollPositionFromWindow();
     }
     this.setState(state => ({
       ...state,
       showEditor: !this.state.showEditor
     }));
   };
-
-  private copyScrollPositionFromWindow() {
-    const scrollPosition = window.scrollY;
-    setImmediate(() => {
-      if (this.resumePreviewRef.current) {
-        (this.resumePreviewRef.current as any).scrollTop = scrollPosition;
-      }
-    });
-  }
-
-  private copyScrollPositionToWindow() {
-    const scrollPosition =
-      this.resumePreviewRef.current &&
-      (this.resumePreviewRef.current as any).scrollTop;
-    setImmediate(() => {
-      window.scrollTo({ top: scrollPosition });
-    });
-  }
 
   private hydrate() {
     const fromLocalStorage = window.localStorage.getItem('resumae');
