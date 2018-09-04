@@ -38,6 +38,16 @@ class App extends React.Component<AppProps, AppState> {
   };
 
   render() {
+    let resumeData: any;
+    try {
+      resumeData = parseYaml(this.state.yamlData);
+    } catch (e) {
+      resumeData = {
+        name: e.message,
+        contactInfo: [],
+        sections: []
+      };
+    }
     return (
       <div style={{ display: 'flex' }}>
         <div className="screen-only">
@@ -50,7 +60,7 @@ class App extends React.Component<AppProps, AppState> {
             onChange={this.handleChange}
           />
         </div>
-        {this.state.yamlData && <Resume {...parseYaml(this.state.yamlData)} />}
+        {this.state.yamlData && <Resume {...resumeData} />}
       </div>
     );
   }
