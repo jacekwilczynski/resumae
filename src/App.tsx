@@ -16,7 +16,34 @@ class App extends React.Component<AppProps, AppState> {
     yamlData: ''
   };
 
+  handleChange = (yamlData: string) => {
+    window.localStorage.setItem('resumae', yamlData);
+    this.setState({ yamlData });
+  };
+
+  handleWindowResize = () => {
+    this.forceUpdate();
+  };
+
   componentDidMount() {
+    this.hydrate();
+    window.addEventListener('resize', this.handleWindowResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowResize);
+  }
+
+  render() {
+    return (
+      <div style={{ display: 'flex' }}>
+        {this.renderEditor()}
+        {this.state.yamlData && <Resume {...this.getResumeData()} />}
+      </div>
+    );
+  }
+
+  private hydrate() {
     const fromLocalStorage = window.localStorage.getItem('resumae');
     if (!fromLocalStorage) {
       fetch(this.props.resumeUrl)
@@ -27,23 +54,29 @@ class App extends React.Component<AppProps, AppState> {
     } else {
       this.setState({ yamlData: fromLocalStorage });
     }
-    window.addEventListener('resize', this.handleWindowResize);
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleWindowResize);
+  private renderEditor() {
+    return (
+      <div className="screen-only">
+        <MonacoEditor
+          language="yaml"
+          theme="vs-dark"
+          height={window.innerHeight}
+          width={window.innerWidth / 2}
+          value={this.state.yamlData}
+          onChange={this.handleChange}
+          options={{
+            wordWrap: 'bounded',
+            wrappingIndent: 'indent',
+            scrollBeyondLastLine: false
+          }}
+        />
+      </div>
+    );
   }
 
-  handleChange = (yamlData: string) => {
-    window.localStorage.setItem('resumae', yamlData);
-    this.setState({ yamlData });
-  };
-
-  handleWindowResize = () => {
-    this.forceUpdate();
-  };
-
-  render() {
+  private getResumeData() {
     let resumeData: any;
     try {
       resumeData = parseYaml(this.state.yamlData);
@@ -54,26 +87,7 @@ class App extends React.Component<AppProps, AppState> {
         sections: []
       };
     }
-    return (
-      <div style={{ display: 'flex' }}>
-        <div className="screen-only">
-          <MonacoEditor
-            language="yaml"
-            theme="vs-dark"
-            height={window.innerHeight}
-            width={window.innerWidth / 2}
-            value={this.state.yamlData}
-            onChange={this.handleChange}
-            options={{
-              wordWrap: 'bounded',
-              wrappingIndent: 'indent',
-              scrollBeyondLastLine: false
-            }}
-          />
-        </div>
-        {this.state.yamlData && <Resume {...resumeData} />}
-      </div>
-    );
+    return resumeData;
   }
 }
 
