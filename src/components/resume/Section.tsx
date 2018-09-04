@@ -1,7 +1,7 @@
 import * as React from 'react';
 import TwoColumnLayout from 'components/TwoColumnLayout';
 import Subsection, { SubsectionProps } from './Subsection';
-import getPlainBody from 'utils/getPlainBody';
+import PlainResumeContent from 'containers/PlainResumeContent';
 import Toggle from 'containers/Toggle';
 
 const serializeSubsection = ({
@@ -34,7 +34,11 @@ const getSectionBody = (
   list?: string[]
 ) => {
   if (subsections) return getSubsections(subsections);
-  return <TwoColumnLayout rightContent={getPlainBody(text, list)} />;
+  return (
+    <TwoColumnLayout
+      rightContent={<PlainResumeContent maybeText={text} maybeList={list} />}
+    />
+  );
 };
 
 export interface SectionProps {

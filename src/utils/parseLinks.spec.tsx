@@ -8,7 +8,7 @@ const parseToString = (input: string) =>
 const link = ({ href, text }: { href: string; text: string }) =>
   `<a href="${href}" target="_blank" rel="noopener noreferrer">${text}</a>`;
 
-describe('given plain text', function() {
+describe('given plain maybeText', function() {
   it('should return a string', function() {
     const text = 'Abcd 1234 efgh.';
     expect(parseToString(text)).toEqual(text);
@@ -16,7 +16,7 @@ describe('given plain text', function() {
 });
 
 describe('given a www tag', function() {
-  describe('without any surrounding text', function() {
+  describe('without any surrounding maybeText', function() {
     const input = '[https://github.com/]';
     const expected = link({
       href: 'https://github.com/',
@@ -29,21 +29,21 @@ describe('given a www tag', function() {
     });
   });
 
-  describe('with surrounding text', function() {
-    const input = 'text before [http://example.org] text after';
+  describe('with surrounding maybeText', function() {
+    const input = 'maybeText before [http://example.org] maybeText after';
     const expected = `text before ${link({
       href: 'http://example.org',
       text: 'example.org'
     })} text after`;
     const actual = parseToString(input);
 
-    it('should render the link surrounded by the text', function() {
+    it('should render the link surrounded by the maybeText', function() {
       expect(actual).toEqual(expected);
     });
   });
 });
 
-describe('given two www tags surrounded by text', function() {
+describe('given two www tags surrounded by maybeText', function() {
   const input = 'page 1 [http://abc.com]page2[https://abc.net/] end';
   const expected = `page 1 ${link({
     href: 'http://abc.com',
@@ -51,7 +51,7 @@ describe('given two www tags surrounded by text', function() {
   })}page2${link({ href: 'https://abc.net/', text: 'abc.net' })} end`;
   const actual = parseToString(input);
 
-  it('should render both anchors with surrounded by text', function() {
+  it('should render both anchors with surrounded by maybeText', function() {
     expect(actual).toEqual(expected);
   });
 });

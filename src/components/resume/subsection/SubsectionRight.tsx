@@ -1,6 +1,6 @@
 import * as React from 'react';
 import LanguageSensitiveExpandButton from 'containers/LanguageSensitiveExpandButton';
-import getPlainBody from 'utils/getPlainBody';
+import PlainResumeContent from 'containers/PlainResumeContent';
 
 export interface SubsectionRightProps {
   post?: string;
@@ -28,7 +28,7 @@ const SubsectionRight: React.SFC<SubsectionRightProps> = ({
     <div
       className={`subsection__body${folded ? ' subsection__body--folded' : ''}`}
     >
-      {getPlainBody(text, list)}
+      {<PlainResumeContent maybeText={text} maybeList={list} />}
     </div>
   </React.Fragment>
 );
