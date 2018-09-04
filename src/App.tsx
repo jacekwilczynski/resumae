@@ -65,8 +65,15 @@ class App extends React.Component<AppProps, AppState> {
       const scrollPosition =
         this.resumePreviewRef.current &&
         (this.resumePreviewRef.current as any).scrollTop;
-      setImmediate(function() {
+      setImmediate(() => {
         window.scrollTo({ top: scrollPosition });
+      });
+    } else {
+      const scrollPosition = window.scrollY;
+      setImmediate(() => {
+        if (this.resumePreviewRef.current) {
+          (this.resumePreviewRef.current as any).scrollTop = scrollPosition;
+        }
       });
     }
     this.setState(state => ({
