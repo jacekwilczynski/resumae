@@ -9,6 +9,8 @@
 .header__caption {
   font-size: 2em;
   letter-spacing: 0.1em;
+  margin-right: 1rem;
+  text-align: right;
 }
 
 .header__list {
