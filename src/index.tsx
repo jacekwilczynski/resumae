@@ -3,9 +3,13 @@ import * as ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 import 'styles/index.css';
+import store from 'store';
+import { loadYaml } from './actions';
 
-ReactDOM.render(
-  <App resumeUrl={`${process.env.PUBLIC_URL}/resume.yaml`} />,
-  document.getElementById('root')
-);
+const resumeUrl = `${process.env.PUBLIC_URL}/resume.yaml`;
+
+ReactDOM.render(<App resumeUrl={resumeUrl} />, document.getElementById('root'));
+
+store().dispatch(loadYaml({ url: resumeUrl }));
+
 registerServiceWorker();
