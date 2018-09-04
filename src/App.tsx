@@ -17,11 +17,16 @@ class App extends React.Component<AppProps, AppState> {
   };
 
   componentDidMount() {
-    fetch(this.props.resumeUrl)
-      .then(res => res.text())
-      .then(yamlData => {
-        this.setState({ yamlData });
-      });
+    const fromLocalStorage = window.localStorage.getItem('resumae');
+    if (!fromLocalStorage) {
+      fetch(this.props.resumeUrl)
+        .then(res => res.text())
+        .then(yamlData => {
+          this.setState({ yamlData });
+        });
+    } else {
+      this.setState({ yamlData: fromLocalStorage });
+    }
     window.addEventListener('resize', this.handleWindowResize);
   }
 
@@ -30,6 +35,7 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   handleChange = (yamlData: string) => {
+    window.localStorage.setItem('resumae', yamlData);
     this.setState({ yamlData });
   };
 
