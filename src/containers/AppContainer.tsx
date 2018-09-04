@@ -38,6 +38,16 @@ class AppContainer extends React.Component<AppProps, AppState> {
     if (e.key === 's' && e.ctrlKey && e.altKey) this.toggleEditor();
   };
 
+  private toggleEditor = () => {
+    this.scrollPositionRetainer.run({
+      goingToFullScreen: this.state.showEditor
+    });
+    this.setState(state => ({
+      ...state,
+      showEditor: !this.state.showEditor
+    }));
+  };
+
   componentDidMount() {
     getInitialYamlData({ sampleResumeUrl: this.props.sampleResumeUrl }).then(
       yamlData => {
@@ -69,22 +79,6 @@ class AppContainer extends React.Component<AppProps, AppState> {
         />
       </App>
     );
-  }
-
-  private toggleEditor = () => {
-    this.retainPreviewScrollPosition(this.state.showEditor);
-    this.setState(state => ({
-      ...state,
-      showEditor: !this.state.showEditor
-    }));
-  };
-
-  private retainPreviewScrollPosition(goingToFullScreen: boolean) {
-    if (goingToFullScreen) {
-      this.scrollPositionRetainer.copyScrollPositionToWindow();
-    } else {
-      this.scrollPositionRetainer.copyScrollPositionFromWindow();
-    }
   }
 }
 
