@@ -1,9 +1,0 @@
-@media screen {
-  .container {
-    margin: 0 auto;
-    max-height: 100vh;
-    max-width: 800px;
-    overflow: auto;
-    padding: 1em;
-  }
-}

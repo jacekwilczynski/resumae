@@ -9,11 +9,16 @@ interface AppProps {
 
 interface AppState {
   yamlData: string;
+  showEditor: boolean;
 }
+
+const getEditorWidth = () =>
+  window.innerWidth > 800 ? window.innerWidth / 2 : window.innerWidth;
 
 class App extends React.Component<AppProps, AppState> {
   state = {
-    yamlData: ''
+    yamlData: '',
+    showEditor: true
   };
 
   handleChange = (yamlData: string) => {
@@ -25,23 +30,38 @@ class App extends React.Component<AppProps, AppState> {
     this.forceUpdate();
   };
 
+  handleKeyUp = (e: KeyboardEvent) => {
+    if (e.key === 's' && e.ctrlKey && e.altKey) this.toggleEditor();
+  };
+
   componentDidMount() {
     this.hydrate();
     window.addEventListener('resize', this.handleWindowResize);
+    window.addEventListener('keyup', this.handleKeyUp);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleWindowResize);
+    window.removeEventListener('keyup', this.handleKeyUp);
   }
 
   render() {
     return (
-      <div style={{ display: 'flex' }}>
-        {this.renderEditor()}
+      <div
+        className={'resumae' + (this.state.showEditor ? ' resumae--split' : '')}
+      >
+        {this.state.showEditor && this.renderEditor()}
         {this.state.yamlData && <Resume {...this.getResumeData()} />}
       </div>
     );
   }
+
+  private toggleEditor = () => {
+    this.setState(state => ({
+      ...state,
+      showEditor: !this.state.showEditor
+    }));
+  };
 
   private hydrate() {
     const fromLocalStorage = window.localStorage.getItem('resumae');
@@ -58,12 +78,12 @@ class App extends React.Component<AppProps, AppState> {
 
   private renderEditor() {
     return (
-      <div className="screen-only">
+      <div className="resumae__editor">
         <MonacoEditor
           language="yaml"
           theme="vs-dark"
           height={window.innerHeight}
-          width={window.innerWidth / 2}
+          width={getEditorWidth()}
           value={this.state.yamlData}
           onChange={this.handleChange}
           options={{

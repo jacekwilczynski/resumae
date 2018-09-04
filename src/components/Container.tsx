@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 const Container: React.SFC = ({ children }) => (
-  <div className="container">{children}</div>
+  <div className="resumae__preview">{children}</div>
 );
 
 export default Container;

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Container from 'components/Container';
 import Header from './resume/Header';
 import Section, { SectionProps } from './resume/Section';
 
@@ -10,11 +9,11 @@ export interface ResumeProps {
 }
 
 const Resume: React.SFC<ResumeProps> = ({ name, contactInfo, sections }) => (
-  <Container>
+  <div className="resumae__preview">
     <Header caption={name} list={contactInfo} />
     {Array.isArray(sections) &&
       sections.map(section => <Section key={section.title} {...section} />)}
-  </Container>
+  </div>
 );
 
 export default Resume;

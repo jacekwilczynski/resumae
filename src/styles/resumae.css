@@ -1,0 +1,27 @@
+.resumae {
+  display: flex;
+  max-height: 100vh;
+}
+
+@media print {
+  .resumae__editor {
+    display: none;
+  }
+}
+
+@media screen {
+  .resumae--split {
+    overflow: hidden;
+  }
+
+  .resumae__preview {
+    margin: 0 auto;
+    max-height: 100vh;
+    max-width: 800px;
+    padding: 1em;
+  }
+
+  .resumae--split .resumae__preview {
+    overflow: auto;
+  }
+}
