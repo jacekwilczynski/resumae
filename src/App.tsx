@@ -59,9 +59,7 @@ class App extends React.Component<AppProps, AppState> {
           height={window.innerHeight}
           width={getEditorWidth()}
         />
-        {this.state.yamlData && (
-          <Resume {...this.getResumeData()} innerRef={this.resumePreviewRef} />
-        )}
+        <Resume {...this.getResumeData()} innerRef={this.resumePreviewRef} />)
       </div>
     );
   }
