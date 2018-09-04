@@ -67,7 +67,7 @@ class AppContainer extends React.Component<AppProps, AppState> {
     return (
       <App split={this.state.showEditor}>
         <Editor
-          showEditor={this.state.showEditor}
+          visible={this.state.showEditor}
           value={this.state.yamlData}
           onChange={this.handleChange}
           height={window.innerHeight}
