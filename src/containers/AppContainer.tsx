@@ -6,6 +6,7 @@ import getInitialYamlData from 'utils/getInitialYamlData';
 import App from 'components/App';
 import { EditorDidMount } from 'react-monaco-editor';
 import Swipe from 'containers/Swipe';
+import Hint from '../components/Hint';
 
 interface AppProps {
   sampleResumeUrl: string;
@@ -15,13 +16,21 @@ interface AppState {
   yamlData: string;
   resizing: boolean;
   showEditor: boolean;
+  hint: {
+    text: string;
+    visible: boolean;
+  };
 }
 
 class AppContainer extends React.Component<AppProps, AppState> {
   state = {
     yamlData: '',
     resizing: false,
-    showEditor: true
+    showEditor: true,
+    hint: {
+      text: '',
+      visible: false
+    }
   };
 
   editor?: { focus: VoidFunction };
@@ -45,7 +54,11 @@ class AppContainer extends React.Component<AppProps, AppState> {
   };
 
   handleFirstTouch = () => {
-    window.removeEventListener('touchstart', this.handleFirstTouch);
+    this.showSwipeHint();
+    console.log('first touch');
+    window.removeEventListener('touchstart', this.handleFirstTouch, {
+      capture: true
+    });
   };
 
   private toggleEditor = () => this.setEditorVisibility(!this.state.showEditor);
@@ -76,6 +89,9 @@ class AppContainer extends React.Component<AppProps, AppState> {
       <Swipe onSwipeLeft={this.hideEditor} onSwipeRight={this.showEditor}>
         {swipeHandlers => (
           <App resizing={this.state.resizing} {...swipeHandlers}>
+            <Hint visible={this.state.hint.visible} onClick={this.hideHint}>
+              {this.state.hint.text}
+            </Hint>
             <Editor
               visible={this.state.showEditor}
               value={this.state.yamlData}
@@ -91,6 +107,19 @@ class AppContainer extends React.Component<AppProps, AppState> {
       </Swipe>
     );
   }
+
+  private showSwipeHint() {
+    this.showHint('Swipe left/right to hide/show the editor pane.');
+  }
+
+  private showHint(text: string) {
+    this.setState({ hint: { text, visible: true } });
+    setTimeout(this.hideHint, 8000);
+  }
+
+  private hideHint = () => {
+    this.setState(({ hint }) => ({ hint: { ...hint, visible: false } }));
+  };
 
   private loadInitialData() {
     getInitialYamlData({ sampleResumeUrl: this.props.sampleResumeUrl }).then(

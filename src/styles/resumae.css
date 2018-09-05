@@ -36,6 +36,32 @@
     max-width: 800px;
     padding: 1em;
   }
+
+  .resumae__hint {
+    font-size: 1.5em;
+    left: 25%;
+    max-width: 30vw;
+    padding: 1em;
+    position: fixed;
+    top: 2rem;
+    transition: 1s;
+    transform: translate(-50%, 0);
+    z-index: 1;
+  }
+
+  .resumae__hint--dark {
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+  }
+
+  .resumae__hint--bright {
+    background-color: rgba(255, 255, 255, 0.75);
+    color: black;
+  }
+
+  .resumae__hint--hidden {
+    opacity: 0;
+  }
 }
 
 @media screen and (max-width: 1000px) {
@@ -45,5 +71,9 @@
 
   .resumae__editor--hidden {
     margin-left: -100vw;
+  }
+
+  .resumae__hint {
+    left: 50%;
   }
 }
