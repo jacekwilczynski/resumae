@@ -44,6 +44,10 @@ class AppContainer extends React.Component<AppProps, AppState> {
     if (e.key === 's' && e.ctrlKey && e.altKey) this.toggleEditor();
   };
 
+  handleFirstTouch = () => {
+    window.removeEventListener('touchstart', this.handleFirstTouch);
+  };
+
   private toggleEditor = () => this.setEditorVisibility(!this.state.showEditor);
   private showEditor = () => this.setEditorVisibility(true);
   private hideEditor = () => this.setEditorVisibility(false);
@@ -56,11 +60,15 @@ class AppContainer extends React.Component<AppProps, AppState> {
     this.loadInitialData();
     window.addEventListener('resize', this.handleWindowResize);
     window.addEventListener('keyup', this.handleKeyUp);
+    window.addEventListener('touchstart', this.handleFirstTouch, {
+      capture: true
+    });
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleWindowResize);
     window.removeEventListener('keyup', this.handleKeyUp);
+    window.removeEventListener('touchstart', this.handleFirstTouch);
   }
 
   render() {
