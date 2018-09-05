@@ -24,7 +24,7 @@ class AppContainer extends React.Component<AppProps, AppState> {
     showEditor: true
   };
 
-  editor: any;
+  editor?: { focus: VoidFunction };
   resumePreviewRef = React.createRef();
 
   handleChange = (yamlData: string) => {
@@ -41,30 +41,19 @@ class AppContainer extends React.Component<AppProps, AppState> {
   };
 
   handleKeyUp = (e: KeyboardEvent) => {
-    if (e.key === 's' && e.ctrlKey && e.altKey)
-      this.toggleEditor(!this.state.showEditor);
+    if (e.key === 's' && e.ctrlKey && e.altKey) this.toggleEditor();
   };
 
-  private toggleEditor = (showEditor: boolean) => {
-    if (showEditor && this.editor && typeof this.editor.focus === 'function') {
-      this.editor.focus();
-    }
-    this.setState({ showEditor });
-  };
-
-  private showEditor = () => this.toggleEditor(true);
-  private hideEditor = () => this.toggleEditor(false);
+  private toggleEditor = () => this.setEditorVisibility(!this.state.showEditor);
+  private showEditor = () => this.setEditorVisibility(true);
+  private hideEditor = () => this.setEditorVisibility(false);
 
   private editorDidMount: EditorDidMount = editor => {
     this.editor = editor;
   };
 
   componentDidMount() {
-    getInitialYamlData({ sampleResumeUrl: this.props.sampleResumeUrl }).then(
-      yamlData => {
-        this.setState({ yamlData });
-      }
-    );
+    this.loadInitialData();
     window.addEventListener('resize', this.handleWindowResize);
     window.addEventListener('keyup', this.handleKeyUp);
   }
@@ -93,6 +82,19 @@ class AppContainer extends React.Component<AppProps, AppState> {
         )}
       </Swipe>
     );
+  }
+
+  private loadInitialData() {
+    getInitialYamlData({ sampleResumeUrl: this.props.sampleResumeUrl }).then(
+      yamlData => {
+        this.setState({ yamlData });
+      }
+    );
+  }
+
+  private setEditorVisibility(showEditor: boolean) {
+    if (this.editor && showEditor) this.editor.focus();
+    this.setState({ showEditor });
   }
 }
 
