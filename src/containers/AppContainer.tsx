@@ -5,6 +5,7 @@ import getResumeData from 'utils/getResumeData';
 import getInitialYamlData from 'utils/getInitialYamlData';
 import App from 'components/App';
 import { EditorDidMount } from 'react-monaco-editor';
+import Swipe from 'containers/Swipe';
 
 interface AppProps {
   sampleResumeUrl: string;
@@ -40,22 +41,19 @@ class AppContainer extends React.Component<AppProps, AppState> {
   };
 
   handleKeyUp = (e: KeyboardEvent) => {
-    if (e.key === 's' && e.ctrlKey && e.altKey) this.toggleEditor();
+    if (e.key === 's' && e.ctrlKey && e.altKey)
+      this.toggleEditor(!this.state.showEditor);
   };
 
-  private toggleEditor = () => {
-    if (
-      !this.state.showEditor &&
-      this.editor &&
-      typeof this.editor.focus === 'function'
-    ) {
+  private toggleEditor = (showEditor: boolean) => {
+    if (showEditor && this.editor && typeof this.editor.focus === 'function') {
       this.editor.focus();
     }
-    this.setState(state => ({
-      ...state,
-      showEditor: !this.state.showEditor
-    }));
+    this.setState({ showEditor });
   };
+
+  private showEditor = () => this.toggleEditor(true);
+  private hideEditor = () => this.toggleEditor(false);
 
   private editorDidMount: EditorDidMount = editor => {
     this.editor = editor;
@@ -78,18 +76,22 @@ class AppContainer extends React.Component<AppProps, AppState> {
 
   render() {
     return (
-      <App resizing={this.state.resizing}>
-        <Editor
-          visible={this.state.showEditor}
-          value={this.state.yamlData}
-          onChange={this.handleChange}
-          editorDidMount={this.editorDidMount}
-        />
-        <Resume
-          {...getResumeData(this.state.yamlData)}
-          innerRef={this.resumePreviewRef}
-        />
-      </App>
+      <Swipe onSwipeLeft={this.hideEditor} onSwipeRight={this.showEditor}>
+        {swipeHandlers => (
+          <App resizing={this.state.resizing} {...swipeHandlers}>
+            <Editor
+              visible={this.state.showEditor}
+              value={this.state.yamlData}
+              onChange={this.handleChange}
+              editorDidMount={this.editorDidMount}
+            />
+            <Resume
+              {...getResumeData(this.state.yamlData)}
+              innerRef={this.resumePreviewRef}
+            />
+          </App>
+        )}
+      </Swipe>
     );
   }
 }

@@ -4,8 +4,11 @@ export interface AppProps {
   resizing: boolean;
 }
 
-const App: React.SFC<AppProps> = ({ resizing, children }) => (
-  <div className={'resumae' + (resizing ? ' resumae--resizing' : '')}>
+const App: React.SFC<AppProps> = ({ resizing, children, ...otherProps }) => (
+  <div
+    className={'resumae' + (resizing ? ' resumae--resizing' : '')}
+    {...otherProps}
+  >
     {children}
   </div>
 );
