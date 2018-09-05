@@ -113,7 +113,7 @@ class AppContainer extends React.Component<AppProps, AppState> {
   }
 
   private showSwipeHint() {
-    this.showHint('Swipe left/right to hide/show the editor pane.');
+    this.showHint('Swipe left/right to hide/show the editor.');
   }
 
   private showHint(text: string) {
