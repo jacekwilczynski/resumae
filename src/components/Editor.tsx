@@ -1,25 +1,17 @@
 import * as React from 'react';
 import MonacoEditor, { EditorDidMount } from 'react-monaco-editor';
+import calcEditorWidth from '../utils/calcEditorWidth';
 
 export interface EditorProps {
   visible: boolean;
   value: string;
   onChange: (newValue: string) => void;
-  height: number;
-  width: number;
   editorDidMount: EditorDidMount;
 }
 
 class Editor extends React.Component<EditorProps> {
   render() {
-    const {
-      visible,
-      value,
-      onChange,
-      height,
-      width,
-      editorDidMount
-    } = this.props;
+    const { visible, value, onChange, editorDidMount } = this.props;
     return (
       <div
         className={
@@ -29,8 +21,8 @@ class Editor extends React.Component<EditorProps> {
         <MonacoEditor
           language="yaml"
           theme="vs-dark"
-          height={height}
-          width={width}
+          height={window.innerHeight}
+          width={calcEditorWidth()}
           value={value}
           onChange={onChange}
           options={{

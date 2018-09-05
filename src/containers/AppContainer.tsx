@@ -2,7 +2,6 @@ import * as React from 'react';
 import Resume from 'components/Resume';
 import Editor from 'components/Editor';
 import getResumeData from 'utils/getResumeData';
-import calcEditorWidth from 'utils/calcEditorWidth';
 import ScrollPositionRetainer from 'utils/ScrollPositionRetainer';
 import getInitialYamlData from 'utils/getInitialYamlData';
 import App from 'components/App';
@@ -90,8 +89,6 @@ class AppContainer extends React.Component<AppProps, AppState> {
           visible={this.state.showEditor}
           value={this.state.yamlData}
           onChange={this.handleChange}
-          height={window.innerHeight}
-          width={calcEditorWidth()}
           editorDidMount={this.editorDidMount}
         />
         <Resume
