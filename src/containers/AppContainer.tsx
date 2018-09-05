@@ -39,17 +39,18 @@ class AppContainer extends React.Component<AppProps, AppState> {
     this.forceUpdate();
   };
 
-  handleKeyDown = () => {
-    if (this.editor && typeof this.editor.focus === 'function') {
-      this.editor.focus();
-    }
-  };
-
   handleKeyUp = (e: KeyboardEvent) => {
     if (e.key === 's' && e.ctrlKey && e.altKey) this.toggleEditor();
   };
 
   private toggleEditor = () => {
+    if (
+      !this.state.showEditor &&
+      this.editor &&
+      typeof this.editor.focus === 'function'
+    ) {
+      this.editor.focus();
+    }
     this.setState(state => ({
       ...state,
       showEditor: !this.state.showEditor
@@ -68,13 +69,11 @@ class AppContainer extends React.Component<AppProps, AppState> {
     );
     window.addEventListener('resize', this.handleWindowResize);
     window.addEventListener('keyup', this.handleKeyUp);
-    window.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleWindowResize);
     window.removeEventListener('keyup', this.handleKeyUp);
-    window.removeEventListener('keydown', this.handleKeyDown);
   }
 
   render() {
