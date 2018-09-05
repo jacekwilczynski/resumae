@@ -15,6 +15,7 @@
   }
 
   .resumae__editor {
+    position: relative;
     transition: margin-left 0.5s;
   }
 
@@ -39,10 +40,10 @@
 
   .resumae__hint {
     font-size: 1.5em;
-    left: 25%;
+    left: 50%;
     max-width: 30vw;
     padding: 1em;
-    position: fixed;
+    position: absolute;
     top: 2rem;
     transition: 1s;
     transform: translate(-50%, 0);
@@ -71,9 +72,5 @@
 
   .resumae__editor--hidden {
     margin-left: -100vw;
-  }
-
-  .resumae__hint {
-    left: 50%;
   }
 }

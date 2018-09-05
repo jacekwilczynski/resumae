@@ -13,7 +13,8 @@ const Editor: React.SFC<EditorProps> = ({
   visible,
   value,
   onChange,
-  editorDidMount
+  editorDidMount,
+  children
 }) => (
   <div
     className={'resumae__editor' + (visible ? '' : ' resumae__editor--hidden')}
@@ -32,6 +33,7 @@ const Editor: React.SFC<EditorProps> = ({
       }}
       editorDidMount={editorDidMount}
     />
+    {children}
   </div>
 );
 

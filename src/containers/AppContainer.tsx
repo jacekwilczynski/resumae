@@ -63,7 +63,10 @@ class AppContainer extends React.Component<AppProps, AppState> {
 
   private toggleEditor = () => this.setEditorVisibility(!this.state.showEditor);
   private showEditor = () => this.setEditorVisibility(true);
-  private hideEditor = () => this.setEditorVisibility(false);
+  private hideEditor = () => {
+    this.setEditorVisibility(false);
+    this.hideHint();
+  };
 
   private editorDidMount: EditorDidMount = editor => {
     this.editor = editor;
@@ -89,15 +92,16 @@ class AppContainer extends React.Component<AppProps, AppState> {
       <Swipe onSwipeLeft={this.hideEditor} onSwipeRight={this.showEditor}>
         {swipeHandlers => (
           <App resizing={this.state.resizing} {...swipeHandlers}>
-            <Hint visible={this.state.hint.visible} onClick={this.hideHint}>
-              {this.state.hint.text}
-            </Hint>
             <Editor
               visible={this.state.showEditor}
               value={this.state.yamlData}
               onChange={this.handleChange}
               editorDidMount={this.editorDidMount}
-            />
+            >
+              <Hint visible={this.state.hint.visible} onClick={this.hideHint}>
+                {this.state.hint.text}
+              </Hint>
+            </Editor>
             <Resume
               {...getResumeData(this.state.yamlData)}
               innerRef={this.resumePreviewRef}
