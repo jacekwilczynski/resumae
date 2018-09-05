@@ -1,5 +1,5 @@
 import * as React from 'react';
-import MonacoEditor from 'react-monaco-editor';
+import MonacoEditor, { EditorDidMount } from 'react-monaco-editor';
 
 export interface EditorProps {
   visible: boolean;
@@ -7,11 +7,19 @@ export interface EditorProps {
   onChange: (newValue: string) => void;
   height: number;
   width: number;
+  editorDidMount: EditorDidMount;
 }
 
 class Editor extends React.Component<EditorProps> {
   render() {
-    const { visible, value, onChange, height, width } = this.props;
+    const {
+      visible,
+      value,
+      onChange,
+      height,
+      width,
+      editorDidMount
+    } = this.props;
     return (
       <div
         className={
@@ -30,6 +38,7 @@ class Editor extends React.Component<EditorProps> {
             wrappingIndent: 'indent',
             scrollBeyondLastLine: false
           }}
+          editorDidMount={editorDidMount}
         />
       </div>
     );

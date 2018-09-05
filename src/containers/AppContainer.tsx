@@ -6,6 +6,7 @@ import calcEditorWidth from 'utils/calcEditorWidth';
 import ScrollPositionRetainer from 'utils/ScrollPositionRetainer';
 import getInitialYamlData from 'utils/getInitialYamlData';
 import App from 'components/App';
+import { EditorDidMount } from 'react-monaco-editor';
 
 interface AppProps {
   sampleResumeUrl: string;
@@ -24,6 +25,7 @@ class AppContainer extends React.Component<AppProps, AppState> {
     showEditor: true
   };
 
+  editor: any;
   resumePreviewRef = React.createRef();
   scrollPositionRetainer = new ScrollPositionRetainer(this.resumePreviewRef);
 
@@ -40,6 +42,12 @@ class AppContainer extends React.Component<AppProps, AppState> {
     this.forceUpdate();
   };
 
+  handleKeyDown = () => {
+    if (this.editor && typeof this.editor.focus === 'function') {
+      this.editor.focus();
+    }
+  };
+
   handleKeyUp = (e: KeyboardEvent) => {
     if (e.key === 's' && e.ctrlKey && e.altKey) this.toggleEditor();
   };
@@ -54,6 +62,10 @@ class AppContainer extends React.Component<AppProps, AppState> {
     }));
   };
 
+  private editorDidMount: EditorDidMount = editor => {
+    this.editor = editor;
+  };
+
   componentDidMount() {
     getInitialYamlData({ sampleResumeUrl: this.props.sampleResumeUrl }).then(
       yamlData => {
@@ -62,11 +74,13 @@ class AppContainer extends React.Component<AppProps, AppState> {
     );
     window.addEventListener('resize', this.handleWindowResize);
     window.addEventListener('keyup', this.handleKeyUp);
+    window.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleWindowResize);
     window.removeEventListener('keyup', this.handleKeyUp);
+    window.removeEventListener('keydown', this.handleKeyDown);
   }
 
   render() {
@@ -78,6 +92,7 @@ class AppContainer extends React.Component<AppProps, AppState> {
           onChange={this.handleChange}
           height={window.innerHeight}
           width={calcEditorWidth()}
+          editorDidMount={this.editorDidMount}
         />
         <Resume
           {...getResumeData(this.state.yamlData)}
