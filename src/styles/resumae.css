@@ -14,8 +14,16 @@
     overflow: hidden;
   }
 
+  .resumae__editor {
+    transition: margin-left 0.3s;
+  }
+
+  .resumae--resizing .resumae__editor {
+    transition: none;
+  }
+
   .resumae__editor--hidden {
-    display: none;
+    margin-left: -50vw;
   }
 
   .resumae__preview {
@@ -23,9 +31,20 @@
     max-height: 100vh;
     max-width: 800px;
     padding: 1em;
+    transition: margin-left 0.3s;
+  }
+
+  .resumae--resizing .resumae__preview {
+    transition: none;
   }
 
   .resumae--split .resumae__preview {
     overflow: auto;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .resumae__editor--hidden {
+    margin-left: -100vw;
   }
 }

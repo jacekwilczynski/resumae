@@ -10,10 +10,6 @@ export interface EditorProps {
 }
 
 class Editor extends React.Component<EditorProps> {
-  shouldComponentUpdate(nextProps: EditorProps) {
-    return this.props.visible || nextProps.visible;
-  }
-
   render() {
     const { visible, value, onChange, height, width } = this.props;
     return (

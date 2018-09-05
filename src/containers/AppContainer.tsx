@@ -13,12 +13,14 @@ interface AppProps {
 
 interface AppState {
   yamlData: string;
+  resizing: boolean;
   showEditor: boolean;
 }
 
 class AppContainer extends React.Component<AppProps, AppState> {
   state = {
     yamlData: '',
+    resizing: false,
     showEditor: true
   };
 
@@ -31,6 +33,10 @@ class AppContainer extends React.Component<AppProps, AppState> {
   };
 
   handleWindowResize = () => {
+    this.setState({ resizing: true });
+    setTimeout(() => {
+      this.setState({ resizing: false });
+    }, 100);
     this.forceUpdate();
   };
 
@@ -65,7 +71,7 @@ class AppContainer extends React.Component<AppProps, AppState> {
 
   render() {
     return (
-      <App split={this.state.showEditor}>
+      <App split={this.state.showEditor} resizing={this.state.resizing}>
         <Editor
           visible={this.state.showEditor}
           value={this.state.yamlData}
