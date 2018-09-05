@@ -63,13 +63,17 @@ class AppContainer extends React.Component<AppProps, AppState> {
 
   private toggleEditor = () => this.setEditorVisibility(!this.state.showEditor);
   private showEditor = () => this.setEditorVisibility(true);
-  private hideEditor = () => {
-    this.setEditorVisibility(false);
-    this.hideHint();
-  };
+  private hideEditor = () => this.setEditorVisibility(false);
 
   private editorDidMount: EditorDidMount = editor => {
     this.editor = editor;
+  };
+
+  handleFirstKey = () => {
+    this.showToggleHint();
+    window.removeEventListener('keydown', this.handleFirstKey, {
+      capture: true
+    });
   };
 
   componentDidMount() {
@@ -79,12 +83,20 @@ class AppContainer extends React.Component<AppProps, AppState> {
     window.addEventListener('touchstart', this.handleFirstTouch, {
       capture: true
     });
+    window.addEventListener('keydown', this.handleFirstKey, {
+      capture: true
+    });
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleWindowResize);
     window.removeEventListener('keyup', this.handleKeyUp);
-    window.removeEventListener('touchstart', this.handleFirstTouch);
+    window.removeEventListener('touchstart', this.handleFirstTouch, {
+      capture: true
+    });
+    window.removeEventListener('keydown', this.handleFirstKey, {
+      capture: true
+    });
   }
 
   render() {
@@ -116,6 +128,10 @@ class AppContainer extends React.Component<AppProps, AppState> {
     this.showHint('Swipe left/right to hide/show the editor.');
   }
 
+  private showToggleHint() {
+    this.showHint('Press Ctrl+Alt+S to toggle the editor.');
+  }
+
   private showHint(text: string) {
     this.setState({ hint: { text, visible: true } });
     setTimeout(this.hideHint, 8000);
@@ -135,6 +151,7 @@ class AppContainer extends React.Component<AppProps, AppState> {
 
   private setEditorVisibility(showEditor: boolean) {
     if (this.editor && showEditor) this.editor.focus();
+    if (!showEditor) this.hideHint();
     this.setState({ showEditor });
   }
 }
