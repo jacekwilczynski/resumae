@@ -10,7 +10,7 @@
 }
 
 @media screen {
-  .resumae--split {
+  .resumae {
     overflow: hidden;
   }
 
@@ -27,13 +27,14 @@
   }
 
   .resumae__preview {
+    overflow: auto;
+    width: 100%;
+  }
+
+  .resumae__container {
     margin: 0 auto;
     max-width: 800px;
     padding: 1em;
-  }
-
-  .resumae--split .resumae__preview {
-    overflow: auto;
   }
 }
 

@@ -2,7 +2,6 @@ import * as React from 'react';
 import Resume from 'components/Resume';
 import Editor from 'components/Editor';
 import getResumeData from 'utils/getResumeData';
-import ScrollPositionRetainer from 'utils/ScrollPositionRetainer';
 import getInitialYamlData from 'utils/getInitialYamlData';
 import App from 'components/App';
 import { EditorDidMount } from 'react-monaco-editor';
@@ -26,7 +25,6 @@ class AppContainer extends React.Component<AppProps, AppState> {
 
   editor: any;
   resumePreviewRef = React.createRef();
-  scrollPositionRetainer = new ScrollPositionRetainer(this.resumePreviewRef);
 
   handleChange = (yamlData: string) => {
     window.localStorage.setItem('resumae', yamlData);
@@ -52,9 +50,6 @@ class AppContainer extends React.Component<AppProps, AppState> {
   };
 
   private toggleEditor = () => {
-    this.scrollPositionRetainer.run({
-      goingToFullScreen: this.state.showEditor
-    });
     this.setState(state => ({
       ...state,
       showEditor: !this.state.showEditor

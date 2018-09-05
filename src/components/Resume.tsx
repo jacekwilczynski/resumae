@@ -16,9 +16,11 @@ const Resume: React.SFC<ResumeProps> = ({
   innerRef
 }) => (
   <div className="resumae__preview" ref={innerRef}>
-    <Header caption={name} list={contactInfo} />
-    {Array.isArray(sections) &&
-      sections.map(section => <Section key={section.title} {...section} />)}
+    <div className="resumae__container">
+      <Header caption={name} list={contactInfo} />
+      {Array.isArray(sections) &&
+        sections.map(section => <Section key={section.title} {...section} />)}
+    </div>
   </div>
 );
 
