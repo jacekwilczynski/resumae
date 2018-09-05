@@ -28,14 +28,8 @@
 
   .resumae__preview {
     margin: 0 auto;
-    max-height: 100vh;
     max-width: 800px;
     padding: 1em;
-    transition: margin-left 0.3s;
-  }
-
-  .resumae--resizing .resumae__preview {
-    transition: none;
   }
 
   .resumae--split .resumae__preview {
