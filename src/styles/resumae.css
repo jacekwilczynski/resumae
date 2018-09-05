@@ -24,7 +24,7 @@
   }
 
   .resumae__editor--hidden {
-    margin-left: -50vw;
+    margin-left: calc(-50vw - 1px);
   }
 
   .resumae__preview {
