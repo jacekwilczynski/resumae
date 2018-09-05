@@ -39,9 +39,6 @@
 }
 
 @media screen and (max-width: 1000px) {
-  .resumae--split {
-  }
-
   .resumae__editor {
     position: fixed;
   }

@@ -78,7 +78,7 @@ class AppContainer extends React.Component<AppProps, AppState> {
 
   render() {
     return (
-      <App split={this.state.showEditor} resizing={this.state.resizing}>
+      <App resizing={this.state.resizing}>
         <Editor
           visible={this.state.showEditor}
           value={this.state.yamlData}
