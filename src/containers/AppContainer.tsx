@@ -55,7 +55,6 @@ class AppContainer extends React.Component<AppProps, AppState> {
 
   handleFirstTouch = () => {
     this.showSwipeHint();
-    console.log('first touch');
     window.removeEventListener('touchstart', this.handleFirstTouch, {
       capture: true
     });
