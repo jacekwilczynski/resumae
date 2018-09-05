@@ -15,7 +15,7 @@
   }
 
   .resumae__editor {
-    transition: margin-left 0.3s;
+    transition: margin-left 0.5s;
   }
 
   .resumae--resizing .resumae__editor {
@@ -38,7 +38,14 @@
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1000px) {
+  .resumae--split {
+  }
+
+  .resumae__editor {
+    position: fixed;
+  }
+
   .resumae__editor--hidden {
     margin-left: -100vw;
   }

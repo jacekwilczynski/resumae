@@ -25,18 +25,3 @@
     width: 100%;
   }
 }
-
-@media (max-width: 1000px) {
-  .resumae--split .two-column-layout {
-    flex-wrap: wrap;
-  }
-
-  .resumae--split .two-column-layout__left {
-    width: 100%;
-  }
-
-  .resumae--split .two-column-layout__right {
-    margin: 0;
-    width: 100%;
-  }
-}

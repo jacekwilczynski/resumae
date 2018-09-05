@@ -1,4 +1,4 @@
 const calcEditorWidth = () =>
-  window.innerWidth > 800 ? window.innerWidth / 2 : window.innerWidth;
+  window.innerWidth > 1000 ? window.innerWidth / 2 : window.innerWidth;
 
 export default calcEditorWidth;
