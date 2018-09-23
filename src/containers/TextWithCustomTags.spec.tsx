@@ -2,7 +2,7 @@ import * as React from 'react';
 import TextWithCustomTags from './TextWithCustomTags';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-const parseToString = (input: string) =>
+const parseToString = (input: any) =>
   renderToStaticMarkup(<TextWithCustomTags children={input} />);
 
 const link = ({ href, text }: { href: string; text: string }) =>
@@ -78,6 +78,16 @@ describe('given a phone tag', function() {
   const actual = parseToString(input);
 
   it('should render an anchor with a tel href', function() {
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe('given a JavaScript object', function() {
+  const input = {};
+  const expected = '';
+  const actual = parseToString(input);
+
+  it('should render nothing', function() {
     expect(actual).toEqual(expected);
   });
 });
