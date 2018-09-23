@@ -12,6 +12,7 @@ const resumeUrl = parse(window.location.search.slice(1)).src as
 ReactDOM.render(
   <AppContainer
     resumeUrl={resumeUrl || `${process.env.PUBLIC_URL}/resume.yaml`}
+    useLocal={!resumeUrl}
   />,
   document.getElementById('root')
 );

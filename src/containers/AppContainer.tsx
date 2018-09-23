@@ -10,6 +10,7 @@ import Hint from '../components/Hint';
 
 interface AppProps {
   resumeUrl: string;
+  useLocal?: boolean;
 }
 
 interface AppState {
@@ -23,6 +24,10 @@ interface AppState {
 }
 
 class AppContainer extends React.Component<AppProps, AppState> {
+  static defaultProps: Partial<AppProps> = {
+    useLocal: true
+  };
+
   state = {
     yamlData: '',
     resizing: false,
@@ -141,11 +146,12 @@ class AppContainer extends React.Component<AppProps, AppState> {
   };
 
   private loadInitialData() {
-    getInitialYamlData({ url: this.props.resumeUrl }).then(
-      yamlData => {
-        this.setState({ yamlData });
-      }
-    );
+    getInitialYamlData({
+      url: this.props.resumeUrl,
+      useLocal: this.props.useLocal
+    }).then(yamlData => {
+      this.setState({ yamlData });
+    });
   }
 
   private setEditorVisibility(showEditor: boolean) {
