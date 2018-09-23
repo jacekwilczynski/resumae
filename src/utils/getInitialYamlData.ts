@@ -1,9 +1,11 @@
 const getInitialYamlData = async ({
-  sampleResumeUrl
+  url,
+  useLocal
 }: {
-  sampleResumeUrl: string;
+  url: string;
+  useLocal?: boolean;
 }) =>
-  window.localStorage.getItem('resumae') ||
-  (await fetch(sampleResumeUrl).then(res => res.text()));
+  (useLocal && window.localStorage.getItem('resumae')) ||
+  (await fetch(url).then(res => res.text()));
 
 export default getInitialYamlData;

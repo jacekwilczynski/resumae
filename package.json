@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "js-yaml": "^3.12.0",
+    "query-string": "^6.1.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-monaco-editor": "^0.18.0",

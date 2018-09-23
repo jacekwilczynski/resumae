@@ -3,9 +3,18 @@ import * as ReactDOM from 'react-dom';
 import registerServiceWorker from 'registerServiceWorker';
 import AppContainer from 'containers/AppContainer';
 import 'styles/index.css';
+import { parse } from 'querystring';
+
+const resumeUrl = parse(window.location.search.slice(1)).src as
+  | string
+  | undefined;
 
 ReactDOM.render(
-  <AppContainer sampleResumeUrl={`${process.env.PUBLIC_URL}/resume.yaml`} />,
+  <AppContainer
+    resumeUrl={resumeUrl || `${process.env.PUBLIC_URL}/resume.yaml`}
+    useLocal={!resumeUrl}
+  />,
   document.getElementById('root')
 );
+
 registerServiceWorker();
