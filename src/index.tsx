@@ -5,7 +5,7 @@ import AppContainer from 'containers/AppContainer';
 import 'styles/index.css';
 
 ReactDOM.render(
-  <AppContainer sampleResumeUrl={`${process.env.PUBLIC_URL}/resume.yaml`} />,
+  <AppContainer resumeUrl={`${process.env.PUBLIC_URL}/resume.yaml`} />,
   document.getElementById('root')
 );
 registerServiceWorker();

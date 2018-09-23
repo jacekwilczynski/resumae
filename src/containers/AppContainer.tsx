@@ -9,7 +9,7 @@ import Swipe from 'containers/Swipe';
 import Hint from '../components/Hint';
 
 interface AppProps {
-  sampleResumeUrl: string;
+  resumeUrl: string;
 }
 
 interface AppState {
@@ -141,7 +141,7 @@ class AppContainer extends React.Component<AppProps, AppState> {
   };
 
   private loadInitialData() {
-    getInitialYamlData({ sampleResumeUrl: this.props.sampleResumeUrl }).then(
+    getInitialYamlData({ url: this.props.resumeUrl }).then(
       yamlData => {
         this.setState({ yamlData });
       }
