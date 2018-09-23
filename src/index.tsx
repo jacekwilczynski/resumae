@@ -5,7 +5,9 @@ import AppContainer from 'containers/AppContainer';
 import 'styles/index.css';
 import { parse } from 'querystring';
 
-const resumeUrl = parse(window.location.search).src as string | undefined;
+const resumeUrl = parse(window.location.search.slice(1)).src as
+  | string
+  | undefined;
 
 ReactDOM.render(
   <AppContainer
