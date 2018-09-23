@@ -20,6 +20,7 @@ export interface TextWithCustomTagsProps {
 const TextWithCustomTags: React.SFC<TextWithCustomTagsProps> = ({
   children
 }) => {
+  if (typeof children === 'object') return null;
   const anchorMatch = regExp.exec(children);
   if (anchorMatch) {
     const [, before, prefix, url, after] = anchorMatch;
