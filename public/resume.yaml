@@ -6,6 +6,7 @@ contactInfo:
   - '[tel:+44 1234 567 890]'
 photo:
   src: https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&h=350
+  position: center 20%
   href: https://github.com/
 sections:
   - title: Work experience
