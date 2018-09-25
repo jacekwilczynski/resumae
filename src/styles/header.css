@@ -30,6 +30,7 @@
   align-self: stretch;
   background: no-repeat center/contain;
   border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   height: 200px;
   justify-self: stretch;
   margin-bottom: 2rem;
