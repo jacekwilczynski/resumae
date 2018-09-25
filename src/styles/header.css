@@ -1,21 +1,25 @@
 .header {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin-bottom: 2em;
+  columns: 16em 2;
 }
 
 .header__caption {
   font-size: 2em;
   letter-spacing: 0.1em;
+  margin-bottom: 1rem;
   margin-right: 1rem;
-  text-align: right;
+}
+
+.header__photo {
+  height: auto;
+  margin-bottom: 2rem;
+  max-width: 100%;
+  text-align: center;
 }
 
 .header__list {
+  break-inside: avoid;
   font-size: 1.08em;
   line-height: 1.5;
   list-style: none;
-  text-align: right;
+  margin-bottom: 2rem;
 }

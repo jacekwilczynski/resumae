@@ -4,9 +4,10 @@ import TextWithCustomTags from 'containers/TextWithCustomTags';
 export interface HeaderProps {
   caption: string;
   list?: string[];
+  photo?: string;
 }
 
-const Header: React.SFC<HeaderProps> = ({ caption, list }) => (
+const Header: React.SFC<HeaderProps> = ({ caption, list, photo }) => (
   <div className="header">
     <div className="header__caption">{caption}</div>
     <div className="header__list">
@@ -17,6 +18,7 @@ const Header: React.SFC<HeaderProps> = ({ caption, list }) => (
           </li>
         ))}
     </div>
+    <img src={photo} alt="Applicant photo" className="header__photo" />
   </div>
 );
 
