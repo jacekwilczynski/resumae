@@ -29,6 +29,7 @@
 .header__photo {
   align-self: stretch;
   background: no-repeat center/contain;
+  border-radius: 50%;
   height: 200px;
   justify-self: stretch;
   margin-bottom: 2rem;
