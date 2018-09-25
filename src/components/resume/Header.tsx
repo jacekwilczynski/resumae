@@ -9,16 +9,21 @@ export interface HeaderProps {
 
 const Header: React.SFC<HeaderProps> = ({ caption, list, photo }) => (
   <div className="header">
-    <div className="header__caption">{caption}</div>
-    <div className="header__list">
-      {Array.isArray(list) &&
-        list.map(item => (
-          <li key={item} className="header__list-item">
-            <TextWithCustomTags>{item}</TextWithCustomTags>
-          </li>
-        ))}
+    <div className="header__column header__text">
+      <div className="header__caption">{caption}</div>
+      <div className="header__list">
+        {Array.isArray(list) &&
+          list.map(item => (
+            <li key={item} className="header__list-item">
+              <TextWithCustomTags>{item}</TextWithCustomTags>
+            </li>
+          ))}
+      </div>
     </div>
-    <img src={photo} alt="Applicant photo" className="header__photo" />
+    <div
+      className="header__column header__photo"
+      style={{ backgroundImage: `url(${photo})` }}
+    />
   </div>
 );
 

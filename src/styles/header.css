@@ -1,5 +1,14 @@
 .header {
-  columns: 16em 2;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-right: -4rem;
+  text-align: center;
+}
+
+.header__column {
+  margin-right: 4rem;
 }
 
 .header__caption {
@@ -9,17 +18,19 @@
   margin-right: 1rem;
 }
 
-.header__photo {
-  height: auto;
-  margin-bottom: 2rem;
-  max-width: 100%;
-  text-align: center;
-}
-
 .header__list {
   break-inside: avoid;
   font-size: 1.08em;
   line-height: 1.5;
   list-style: none;
   margin-bottom: 2rem;
+}
+
+.header__photo {
+  align-self: stretch;
+  background: no-repeat center/contain;
+  height: 200px;
+  justify-self: stretch;
+  margin-bottom: 2rem;
+  width: 200px;
 }
