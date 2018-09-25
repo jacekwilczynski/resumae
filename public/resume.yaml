@@ -4,7 +4,8 @@ contactInfo:
   - NS32P London, UK
   - '[mailto:john_smith5@mailbox.com]'
   - '[tel:+44 1234 567 890]'
-photo: https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&h=350
+photo:
+  src: https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&h=350
 sections:
   - title: Work experience
     subsections:

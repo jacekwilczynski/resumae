@@ -1,25 +1,20 @@
 import * as React from 'react';
-import Header from './resume/Header';
+import Header, { HeaderProps } from './resume/Header';
 import Section, { SectionProps } from './resume/Section';
 
-export interface ResumeProps {
-  name: string;
-  contactInfo: string[];
-  photo?: string;
+export interface ResumeProps extends HeaderProps {
   sections: SectionProps[];
   innerRef?: React.Ref<any>;
 }
 
 const Resume: React.SFC<ResumeProps> = ({
-  name,
-  contactInfo,
-  photo,
   sections,
-  innerRef
+  innerRef,
+  ...headerProps
 }) => (
   <div className="resumae__preview" ref={innerRef}>
     <div className="resumae__container">
-      <Header caption={name} list={contactInfo} photo={photo} />
+      <Header {...headerProps} />
       {Array.isArray(sections) &&
         sections.map(
           section => section && <Section key={section.title} {...section} />
