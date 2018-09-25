@@ -19,7 +19,9 @@ const Resume: React.SFC<ResumeProps> = ({
     <div className="resumae__container">
       <Header caption={name} list={contactInfo} />
       {Array.isArray(sections) &&
-        sections.map(section => <Section key={section.title} {...section} />)}
+        sections.map(
+          section => section && <Section key={section.title} {...section} />
+        )}
     </div>
   </div>
 );
