@@ -34,5 +34,11 @@
   height: 200px;
   justify-self: stretch;
   margin-bottom: 2rem;
+  transition: opacity 0.3s, transform 0.3s;
   width: 200px;
+}
+
+.header__photo:hover {
+  opacity: 1;
+  transform: scale(0.9, 0.9);
 }
