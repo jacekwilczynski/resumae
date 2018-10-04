@@ -8,6 +8,11 @@ export interface SubsectionRightProps {
   company?: string;
   text?: string;
   list?: string[];
+  image?: {
+    src: string;
+    alt: string;
+    href?: string;
+  };
   folded?: boolean;
   onExpandClick: React.MouseEventHandler;
 }
@@ -18,7 +23,8 @@ const SubsectionRight: React.SFC<SubsectionRightProps> = ({
   folded,
   onExpandClick,
   text,
-  list
+  list,
+  image
 }) => (
   <React.Fragment>
     <div className="subsection__header">
@@ -37,6 +43,11 @@ const SubsectionRight: React.SFC<SubsectionRightProps> = ({
     <div
       className={`subsection__body${folded ? ' subsection__body--folded' : ''}`}
     >
+      {image && (
+        <a href={image.href}>
+          <img src={image.src} alt={image.alt} />
+        </a>
+      )}
       {<PlainResumeContent maybeText={text} maybeList={list} />}
     </div>
   </React.Fragment>
