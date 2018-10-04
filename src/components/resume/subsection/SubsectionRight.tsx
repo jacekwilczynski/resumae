@@ -1,18 +1,15 @@
 import * as React from 'react';
 import LanguageSensitiveExpandButton from 'containers/LanguageSensitiveExpandButton';
 import PlainResumeContent from 'containers/PlainResumeContent';
-import TextWithCustomTags from '../../../containers/TextWithCustomTags';
+import TextWithCustomTags from 'containers/TextWithCustomTags';
+import Image, { ImageProps } from 'components/Image';
 
 export interface SubsectionRightProps {
   post?: string;
   company?: string;
   text?: string;
   list?: string[];
-  image?: {
-    src: string;
-    alt: string;
-    href?: string;
-  };
+  image?: ImageProps;
   folded?: boolean;
   onExpandClick: React.MouseEventHandler;
 }
@@ -43,11 +40,7 @@ const SubsectionRight: React.SFC<SubsectionRightProps> = ({
     <div
       className={`subsection__body${folded ? ' subsection__body--folded' : ''}`}
     >
-      {image && (
-        <a href={image.href}>
-          <img src={image.src} alt={image.alt} />
-        </a>
-      )}
+      {image && <Image {...image} />}
       {<PlainResumeContent maybeText={text} maybeList={list} />}
     </div>
   </React.Fragment>
