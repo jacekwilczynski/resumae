@@ -1,6 +1,7 @@
 import * as React from 'react';
 import LanguageSensitiveExpandButton from 'containers/LanguageSensitiveExpandButton';
 import PlainResumeContent from 'containers/PlainResumeContent';
+import TextWithCustomTags from '../../../containers/TextWithCustomTags';
 
 export interface SubsectionRightProps {
   post?: string;
@@ -21,8 +22,16 @@ const SubsectionRight: React.SFC<SubsectionRightProps> = ({
 }) => (
   <React.Fragment>
     <div className="subsection__header">
-      <h3 className="subsection__post">{post}</h3>
-      <h4 className="subsection__company">{company}</h4>
+      <h3 className="subsection__post">
+        {typeof post === 'string' && (
+          <TextWithCustomTags>{post}</TextWithCustomTags>
+        )}
+      </h3>
+      <h4 className="subsection__company">
+        {typeof company === 'string' && (
+          <TextWithCustomTags>{company}</TextWithCustomTags>
+        )}
+      </h4>
     </div>
     {folded ? <LanguageSensitiveExpandButton onClick={onExpandClick} /> : null}
     <div
