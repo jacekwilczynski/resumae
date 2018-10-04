@@ -12,8 +12,6 @@
   text-transform: uppercase;
 }
 
-@media screen {
-  .section a {
-    font-weight: bold;
-  }
+.section a {
+  font-weight: bold;
 }
