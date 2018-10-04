@@ -1,13 +1,15 @@
 import * as React from 'react';
 import LanguageSensitiveExpandButton from 'containers/LanguageSensitiveExpandButton';
 import PlainResumeContent from 'containers/PlainResumeContent';
-import TextWithCustomTags from '../../../containers/TextWithCustomTags';
+import TextWithCustomTags from 'containers/TextWithCustomTags';
+import Image, { ImageProps } from 'components/Image';
 
 export interface SubsectionRightProps {
   post?: string;
   company?: string;
   text?: string;
   list?: string[];
+  image?: ImageProps;
   folded?: boolean;
   onExpandClick: React.MouseEventHandler;
 }
@@ -18,7 +20,8 @@ const SubsectionRight: React.SFC<SubsectionRightProps> = ({
   folded,
   onExpandClick,
   text,
-  list
+  list,
+  image
 }) => (
   <React.Fragment>
     <div className="subsection__header">
@@ -37,6 +40,7 @@ const SubsectionRight: React.SFC<SubsectionRightProps> = ({
     <div
       className={`subsection__body${folded ? ' subsection__body--folded' : ''}`}
     >
+      {image && <Image {...image} />}
       {<PlainResumeContent maybeText={text} maybeList={list} />}
     </div>
   </React.Fragment>
