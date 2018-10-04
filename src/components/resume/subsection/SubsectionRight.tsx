@@ -25,6 +25,7 @@ const SubsectionRight: React.SFC<SubsectionRightProps> = ({
 }) => (
   <React.Fragment>
     <div className="subsection__header">
+      {image && <Image {...image} float={true} />}
       <h3 className="subsection__post">
         {typeof post === 'string' && (
           <TextWithCustomTags>{post}</TextWithCustomTags>
@@ -40,7 +41,6 @@ const SubsectionRight: React.SFC<SubsectionRightProps> = ({
     <div
       className={`subsection__body${folded ? ' subsection__body--folded' : ''}`}
     >
-      {image && <Image {...image} />}
       {<PlainResumeContent maybeText={text} maybeList={list} />}
     </div>
   </React.Fragment>
