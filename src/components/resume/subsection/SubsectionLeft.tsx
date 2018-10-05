@@ -7,8 +7,12 @@ export interface SubsectionLeftProps {
 
 const SubsectionLeft: React.SFC<SubsectionLeftProps> = ({ time, location }) => (
   <div className="subsection__time-location">
-    {time && <p className="subsection__time">{time.replace(/-/g, ' – ')}</p>}
-    {location && <p className="subsection__location">{location}</p>}
+    {typeof time === 'string' && (
+      <p className="subsection__time">{time.replace(/-/g, ' – ')}</p>
+    )}
+    {typeof location === 'string' && (
+      <p className="subsection__location">{location}</p>
+    )}
   </div>
 );
 
